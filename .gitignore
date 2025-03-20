@@ -1,0 +1,31 @@
+# Entorno virtual de Python
+venv/
+env/
+.env
+.env.local
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+db.sqlite3  # Si usas SQLite, ignora la base de datos local
+migrations/  # Si usas Django o Alembic, las migraciones pueden ignorarse en algunos casos
+
+# Node.js
+node_modules/
+dist/
+build/
+.cache/
+
+# Archivos de configuración de entorno
+.env
+.env.local
+
+# Archivos del sistema
+.DS_Store  # macOS
+Thumbs.db  # Windows
+
+# Logs y caché
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
