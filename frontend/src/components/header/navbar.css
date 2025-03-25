@@ -1,0 +1,44 @@
+.navbar {
+    width: 1300px;
+    height: 70px;
+    padding-inline: 24px;
+    border: solid 1px gray;
+    border-radius: 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+}
+.logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+.navbar-list {
+    display: flex;
+}
+.navbar-list__ul {
+    list-style: none;
+    display: flex;
+    gap: 24px;
+}
+.navbar-list__li {
+    text-decoration: none;
+}
+.navbar-list__link {
+    text-decoration: none;
+    color: #262522;
+    padding: 8px;
+}
+
+.navbar-list__link:hover {
+    font-weight: 600;
+    border-bottom: solid 2px #ee6352;
+}
+
+/* El estilo que tiene el imput sera el del icono*/
+
+.input {
+    background-color: #262522;
+    opacity: 8%;
+}
