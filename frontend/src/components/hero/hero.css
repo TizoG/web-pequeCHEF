@@ -1,0 +1,79 @@
+.content {
+    position: relative;
+    margin: 16px auto;
+    width: 1350px;
+    height: 577px;
+}
+.content__img {
+    border-radius: 32px;
+    width: 1350px;
+    height: 577px;
+    object-fit: cover;
+}
+
+.content::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(38, 37, 34, 0.6);
+    border-radius: 32px;
+    z-index: 1;
+}
+
+.content__text {
+    position: absolute;
+    top: 120px;
+    left: 221px;
+    width: 870px;
+    height: 337px;
+    text-align: center;
+    margin: auto;
+    z-index: 2;
+}
+
+.content__text__h1 {
+    color: #f0ebe1;
+    font-size: 80px;
+    font-weight: 900;
+    margin-bottom: 0px;
+    margin-top: 0px;
+}
+/*
+Este es el div eliminado del hero
+.content__text__parrafo {
+    width: 430px;
+    height: 87px;
+    margin: auto;
+}
+*/
+
+.content__text__p {
+    color: #f0ebe1;
+    font-size: 21px;
+    margin-top: 0px;
+    line-height: 140%;
+}
+/*
+Div que engloba el boton
+.content__button {
+    margin-top: 40px;
+}
+*/
+
+.button {
+    padding: 12px 24px;
+    border-radius: 24px;
+    background-color: #f29c33;
+    color: #262522;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+}
+
+.button:hover {
+    cursor: pointer;
+    background-color: #e08f2c;
+}

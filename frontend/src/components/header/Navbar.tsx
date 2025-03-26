@@ -1,5 +1,6 @@
 import './navbar.css';
-import logoo from '../../assets/logoo.webp';
+import logoo from '../../assets/logoo.png';
+import { IoSearch } from 'react-icons/io5';
 
 // Componente reutilizable para los enlaces del Navbar
 
@@ -29,8 +30,13 @@ export function Navbar() {
     return (
         <nav className="navbar">
             {/* Logo */}
-            <div>
-                <img src={logoo} alt="logo de la web" className="logo" />
+            <div className="container-logo">
+                <a href="#" className="navbar-logo__link">
+                    <img src={logoo} alt="logo de la web" className="logo" />
+                    <p className="text-logo">
+                        peque<span className="text-logo__span">CHEF</span>
+                    </p>
+                </a>
             </div>
 
             {/* Lista de navegacion */}
@@ -43,15 +49,16 @@ export function Navbar() {
             </div>
 
             {/* Barra de Busqueda */}
-            <div>
+            <div className="content-search">
                 <input type="text" className="input" />
+                <div className="content-icon">
+                    <IoSearch className="icon" />
+                </div>
             </div>
         </nav>
     );
 }
-// TODO: Implementar bien la imagen
-// TODO: Implementar iconos
+
 // TODO: Mejorar la documentación
-// TODO: Mejorar la estructura
-// TODO: Mejorar la estilización
 // TODO: Mejorar la funcionalidad
+//TODO: Crear enlaces a otras secciones

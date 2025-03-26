@@ -1,4 +1,12 @@
+* {
+    padding: 0px;
+    box-sizing: border-box;
+}
 body {
     background-color: #f0ebe1;
     font-family: 'Roboto';
 }
+/*
+Cuando tenga ganas de arreglar fallos arreglar el poner el margen
+en toda la web a 0px
+*/
