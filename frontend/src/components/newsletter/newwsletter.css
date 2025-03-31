@@ -1,0 +1,66 @@
+.newsletter {
+    width: 1350px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    justify-content: center;
+    background-color: #ee6352;
+    border-radius: 32px;
+    margin-top: 64px;
+    padding: 64px 117px;
+}
+
+.newsletter__container {
+}
+
+.newsletter__container__p {
+    color: #fffbf2;
+    text-align: center;
+    opacity: 80%;
+    font-size: 18px;
+    margin: 0px;
+}
+
+.newsletter__container__h1 {
+    color: #fffbf2;
+    font-size: 80px;
+    text-align: center;
+    margin-top: 12px;
+    margin-bottom: 12px;
+}
+.newsletter__container__p__text {
+    color: #fffbf2;
+    text-align: center;
+    font-size: 18px;
+    line-height: 140%;
+    width: 648px;
+    margin: auto;
+}
+
+.newsletter__container__input {
+    display: flex;
+    padding: 8px 6px;
+    width: 435px;
+    height: 50px;
+    background-color: #f0ebe1;
+    border-radius: 24px;
+    justify-content: space-between;
+    margin: auto;
+    margin-top: 48px;
+}
+.input {
+    background-color: transparent;
+    outline: none;
+    font-size: 21px;
+}
+
+.input-button {
+    background-color: #262522;
+    color: #f0ebe1;
+    padding: 12px 24px;
+    font-size: 14px;
+    border-radius: 24px;
+    border: none;
+    cursor: pointer;
+    align-self: center;
+}

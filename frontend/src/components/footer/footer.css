@@ -1,0 +1,20 @@
+.footer {
+    background-color: #262522;
+    width: 1300px;
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+.logo-footer {
+    width: 40px;
+    height: 35px;
+}
+.footer-list {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+}

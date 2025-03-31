@@ -1,18 +1,24 @@
 import { useEffect, useState } from 'react';
 import { CardRecetas } from '../recetas/CardRecetas';
 import './coleccionRecetas.css';
-import { Recetas } from '../recetas/Recetas';
 
 type Props = {
     href: number;
     text: string;
     setCategoria: React.Dispatch<React.SetStateAction<number>>;
+    isCategoria: number;
 };
 
-function ColeccionButton({ href, text, setCategoria }: Props) {
+function ColeccionButton({ href, text, setCategoria, isCategoria }: Props) {
     return (
         <div>
-            <button type="button" onClick={() => setCategoria(href)}>
+            <button
+                className={`coleccion-button ${
+                    href === isCategoria ? 'active' : ''
+                }`}
+                type="button"
+                onClick={() => setCategoria(href)}
+            >
                 {text}
             </button>
         </div>
@@ -88,9 +94,10 @@ export function ColeccionRecetas() {
                     satisfacer todos los paladares.
                 </p>
             </div>
-            <div>
+            <div className="colection__buttons">
                 {coleccionLinks.map((link, index) => (
                     <ColeccionButton
+                        isCategoria={isCategoria}
                         setCategoria={setCategoria}
                         key={index}
                         {...link}
@@ -99,7 +106,7 @@ export function ColeccionRecetas() {
             </div>
             {loading && <p>Cargando recetas...</p>}
             {error && <p>Error: {error}</p>}
-            <div>
+            <div className="colection__cards">
                 {!loading && !error && recetasVisibles.length > 0
                     ? recetasVisibles.map((receta) => (
                           <CardRecetas
