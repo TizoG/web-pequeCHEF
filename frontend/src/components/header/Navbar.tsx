@@ -7,8 +7,9 @@ import { IoSearch } from 'react-icons/io5';
 type Props = {
     label: string;
     href: string;
+    className: string;
 };
-function NavbarItem({ label, href }: Props) {
+export function NavbarItem({ label, href, className }: Props) {
     return (
         <li className="navbar-list__li">
             <a href={href} className="navbar-list__link">
@@ -17,7 +18,7 @@ function NavbarItem({ label, href }: Props) {
         </li>
     );
 }
-
+//TODO: arreglar los clasname de los componentes
 // Array con los elementos del Navbar
 const navLinks = [
     { label: 'HOME', href: '#' },

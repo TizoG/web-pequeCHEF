@@ -28,7 +28,7 @@ def listar_recetas_ingredientes(ingredientes: str, db: Session = Depends(get_bd)
 
     if not ingredientes_ids:
         raise HTTPException(
-            status_code=404, details="No se encontraron ingredientes")
+            status_code=404, detail="No se encontraron ingredientes")
 
     # Obtener IDs como lista
     ids = [id[0] for id in ingredientes_ids]
@@ -39,7 +39,7 @@ def listar_recetas_ingredientes(ingredientes: str, db: Session = Depends(get_bd)
 
     if not recetas_ids:
         raise HTTPException(
-            status_code=404, details="No se encontraron recetas")
+            status_code=404, detail="No se encontraron recetas")
 
     # Convertir a lista simple de IDs
     recetas_ids = [id[0] for id in recetas_ids]
