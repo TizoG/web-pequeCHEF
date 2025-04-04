@@ -1,13 +1,20 @@
 import { Button } from '../Button';
 import './recetas.css';
 type Props = {
+    id: number;
     imagen: string;
     titulo: string;
     description: string;
     tiempo: string;
 };
 
-export function CardRecetas({ imagen, titulo, description, tiempo }: Props) {
+export function CardRecetas({
+    id,
+    imagen,
+    titulo,
+    description,
+    tiempo,
+}: Props) {
     return (
         <div className="card-receta">
             <img src={imagen} alt="Imagen de la receta" className="img" />
@@ -16,7 +23,11 @@ export function CardRecetas({ imagen, titulo, description, tiempo }: Props) {
                 <p className="card-receta__content__p">{description}</p>
                 <div className="card-receta__content__button">
                     <p>{tiempo}</p>
-                    <Button text="VER RECETA" className="card-button" />
+                    <Button
+                        text="VER RECETA"
+                        className="card-button"
+                        to={`/recetas/${id}`}
+                    />
                 </div>
             </div>
         </div>

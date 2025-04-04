@@ -1,0 +1,155 @@
+.container {
+    width: 1350px;
+    margin: auto;
+    margin-top: 80px;
+}
+.container-receta {
+    text-align: center;
+}
+.centrado {
+    text-align: center;
+}
+.receta__titulo {
+    font-size: 80px;
+    font-family: 'Montserrat', sans-serif;
+    width: 870px;
+    margin: auto;
+    margin-top: 12px;
+    color: #262522;
+    font-weight: 800;
+}
+.receta__descripcion {
+    font-size: 21px;
+    width: 648px;
+    color: #262522;
+    opacity: 60%;
+    text-align: center;
+    margin: auto;
+    margin-top: 12px;
+}
+.receta__imagen {
+    width: 1350px;
+    height: 640px;
+    object-fit: cover;
+    border-radius: 24px;
+}
+.container__contenido {
+    display: flex;
+    gap: 56px;
+}
+.container__post-receta {
+    max-width: 645px;
+    margin-left: 175px;
+    text-align: left;
+}
+.receta__descripcion__posterior {
+    text-align: left;
+    width: 560px;
+    font-size: 16px;
+    line-height: 140%;
+    color: #333333;
+    opacity: 80%;
+}
+.instrucciones {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 40px;
+    margin-top: 40px;
+    margin-bottom: 18px;
+}
+.instrucciones__p {
+    font-size: 16px;
+    line-height: 140%;
+    color: #333333;
+    opacity: 80%;
+}
+.pasos__title {
+    margin-top: 40px;
+    margin-bottom: 16px;
+    color: #ee6352;
+    font-size: 18px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    margin-top: 0px;
+}
+.pasos__li {
+    font-size: 16px;
+    line-height: 140%;
+    color: #333333;
+    opacity: 80%;
+}
+.container__ingredientes__nutricion {
+    padding-top: 40px;
+    padding-bottom: 16px;
+    max-width: 460px;
+}
+.container__ingredientes {
+    text-align: left;
+    background-color: #fffbf2;
+    padding: 24px 16px;
+    border: 1px solid rgba(38, 37, 34, 0.24);
+    border-radius: 24px;
+    margin-bottom: 16px;
+}
+.container__ingredientes ul {
+    padding-left: 30px;
+}
+.container__ingredientes li {
+    font-size: 21px;
+    line-height: 140%;
+    color: #262522;
+}
+.pasos__subtitle {
+    font-size: 16px;
+    line-height: 140%;
+    color: #262522;
+    font-weight: 200;
+}
+.p__calorias {
+    margin: 0px;
+}
+.anotacion {
+    color: #333333;
+    opacity: 60%;
+    font-size: 12px;
+    line-height: 120%;
+    text-align: left;
+}
+
+/*EXPERIEMTAL*/
+.experiment {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    max-width: 480px;
+    margin: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center; /* Centra los íconos y el texto verticalmente */
+    font-size: 16px; /* Tamaño de fuente más legible */
+}
+
+.experiment i {
+    margin-right: 8px;
+    font-size: 20px; /* Tamaño del ícono */
+    color: #555; /* Puedes cambiar el color de los íconos */
+}
+
+.experiment span {
+    margin-left: 24px;
+    margin-right: 24px;
+    color: #777; /* Color más suave para los separadores */
+    font-weight: bold;
+}
+
+.experiment p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500; /* Negrita para el texto */
+    color: #333; /* Color principal del texto */
+}
+
+.experiment p i {
+    color: #444; /* Color personalizado para los íconos */
+}

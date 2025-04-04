@@ -17,7 +17,7 @@ class Recetas(BASE):
     # Relaciones
     categoria = relationship("Categorias", back_populates="recetas")
     receta_ingredientes = relationship(
-        "RecetaIngredientes", back_populates="receta", cascade="all, delete")
+        "RecetaIngredientes", back_populates="receta", cascade="all, delete, delete-orphan")
     # recetas_alergias = relationship(
     #    "RecetaAlergias", back_populates="receta", cascade="all, delete",
     #    lazy="dynamic")

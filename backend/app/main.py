@@ -26,19 +26,17 @@ db = session_local()
 # Llamar a la función para insertar datos
 """respuesta = insertar_receta_con_ingredientes(
     db=db,
-    categoria_nombre="meriendas",
-    titulo="Galletas sin gluten para bebés",
-    descripcion="Esta es una receta muy práctica si tu bebé tiene intolerancia al gluten, pero la verdad es que estas galletas están muy ricas y le gustarán igualmente si lo tolera bien. ¡Anímate a prepararlas!",
+    categoria_nombre="pasta",
+    titulo=" Espaguetis a la Carbonara",
+    descripcion="Una receta clásica italiana hecha con una salsa cremosa de huevo, queso parmesano y panceta, sin necesidad de nata.",
     pasos="Saca la mantequilla de la nevera para que esté a temperatura ambiente y córtala en trocitos. Ponla en un bol grande y bátela con una cuchara o batidora hasta que esté en punto pomada (con textura de crema).",
-    imagen="https://www.recetasparamibebe.com/wp-content/uploads/2025/01/Receta_arroz_calabacin-930x620.jpg",
+    imagen="https://www.gallinablanca.es/receta/espaguetis-a-la-carbonara-28137/",
     lista_ingredientes=[
-        {"nombre": "harina de maíz", "cantidad": "165", "unidad": "gramos"},
-        {"nombre": "harina de arroz integral", "cantidad": "165", "unidad": "gramos"},
-        {"nombre": "mantequilla sin sal", "cantidad": "125", "unidad": "gramos"},
-        {"nombre": "huevo", "cantidad": "1", "unidad": "unidad"},
-        {"nombre": "leche", "cantidad": "7", "unidad": "ml"},
-        {"nombre": "canela en polvo", "cantidad": "1", "unidad": "cucharadita"},
-        {"nombre": "azúcar glass", "cantidad": "70", "unidad": "g"},
+        {"nombre": "Espagetis", "cantidad": "200", "unidad": "gramos"},
+        {"nombre": "Panceta", "cantidad": "100", "unidad": "gramos"},
+        {"nombre": "Queso parmesano", "cantidad": "50", "unidad": "gramos"},
+        {"nombre": "huevo", "cantidad": "2", "unidad": "unidad"},
+        
 
     ]
 )

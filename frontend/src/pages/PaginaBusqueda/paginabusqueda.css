@@ -1,0 +1,29 @@
+.container__busquedas {
+    max-width: 1350px;
+    margin: auto;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+.busquedas__titulo {
+    margin: auto;
+    font-size: 40px;
+    font-family: 'Montserrat', sans-serif;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+.botones {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 25px;
+}
+
+.boton__anterior__posterior {
+    font-size: 20px;
+    padding: 16px 10px;
+    border-radius: 8px;
+
+    cursor: pointer;
+}

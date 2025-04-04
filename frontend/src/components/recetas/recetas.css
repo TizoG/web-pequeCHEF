@@ -123,6 +123,8 @@
     background-color: transparent;
     cursor: pointer;
     transition: all 0.2s ease;
+    text-decoration: none;
+    color: #262522;
 }
 
 .card-button:hover {
