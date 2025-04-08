@@ -92,3 +92,35 @@
 .content-icon:hover .icon {
     color: rgba(255, 255, 255, 0.8);
 }
+
+/* Proximamente */
+.navbar-item__container {
+    position: relative; /* Permite que el overlay se posicione sobre el enlace */
+    display: inline-block; /* Mantiene el tamaño del enlace */
+}
+
+.navbar-item__overlay {
+    position: absolute; /* Ubicación encima del enlace */
+    top: -15px; /* Ajusta este valor para desplazar el texto */
+    left: 50%; /* Centra el texto horizontalmente */
+    transform: translateX(-50%) rotate(-5deg); /* Ajusta la posición horizontal */
+    background-color: #ee6352; /* Fondo rojo */
+    color: white; /* Letras blancas */
+    font-size: 12px; /* Tamaño del texto */
+    font-weight: bold; /* Negrita */
+    padding: 2px 5px; /* Espaciado interno */
+    border-radius: 3px; /* Bordes redondeados */
+    z-index: 2; /* Asegura que se vea encima */
+    pointer-events: none; /* Evita interacciones con el texto */
+    white-space: nowrap; /* Evita que el texto se desborde */
+    opacity: 0.9; /* Ligero efecto de transparencia */
+    padding: 4px 8px;
+    border-radius: 12px;
+}
+
+.navbar-list__link.disabled {
+    color: gray; /* Cambiar el color para indicar que está deshabilitado */
+    pointer-events: none; /* Deshabilita los clics */
+    cursor: not-allowed; /* Cambia el cursor a "no permitido" */
+    opacity: 0.6; /* Reduce la opacidad */
+}

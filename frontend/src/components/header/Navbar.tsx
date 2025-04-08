@@ -10,13 +10,27 @@ type Props = {
     label: string;
     href: string;
     className: string;
+    disabled?: boolean;
 };
-export function NavbarItem({ label, href, className }: Props) {
+export function NavbarItem({
+    label,
+    href,
+    className,
+    disabled = false,
+}: Props) {
     return (
         <li className="navbar-list__li">
-            <a href={href} className={className}>
-                {label}
-            </a>
+            <div className="navbar-item__container">
+                {disabled && (
+                    <span className="navbar-item__overlay">Próximamente</span>
+                )}
+                <a
+                    href={href}
+                    className={`${className} ${disabled ? 'disabled' : ''}`}
+                >
+                    {label}
+                </a>
+            </div>
         </li>
     );
 }
@@ -25,7 +39,7 @@ export function NavbarItem({ label, href, className }: Props) {
 const navLinks = [
     { label: 'HOME', href: '/' },
     { label: 'RECIPES', href: '/recetas' },
-    { label: 'COOKING TIPS', href: '/tiposcocina' },
+    { label: 'COOKING TIPS', href: '/tiposcocina', disabled: true },
     { label: 'ABOUT US', href: '/aboutus' },
 ];
 export function Navbar() {
@@ -62,6 +76,7 @@ export function Navbar() {
                             key={index}
                             {...link}
                             className="navbar-list__link"
+                            disabled={link.disabled}
                         />
                     ))}
                 </ul>
