@@ -15,7 +15,7 @@
     font-size: 80px;
     font-family: 'Montserrat', sans-serif;
     color: #262522;
-    font-weight: 800;
+    font-weight: bold;
     margin: 0px;
 }
 
@@ -43,9 +43,8 @@
 }
 .container-page-about__mi-historia h2 {
     font-size: 40px;
-    font-family: 'Montserrat', sans-serif;
     color: #262522;
-    font-weight: 800;
+    font-weight: bold;
     margin: 0px;
     margin-bottom: 15px;
 }
@@ -72,9 +71,8 @@
 
 .container-page-about__inspiracion__text h2 {
     font-size: 40px;
-    font-family: 'Montserrat', sans-serif;
     color: #262522;
-    font-weight: 800;
+    font-weight: bold;
     margin: 0px;
     margin-bottom: 15px;
 }
@@ -110,9 +108,9 @@
 
 .conectemos h2 {
     font-size: 40px;
-    font-family: 'Montserrat', sans-serif;
+
     color: #262522;
-    font-weight: 800;
+    font-weight: bold;
     margin: 0px;
     margin-bottom: 15px;
     margin-top: 80px;

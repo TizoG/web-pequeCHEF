@@ -5,7 +5,7 @@ export function PageAbout() {
         <section className="container-section">
             <div className="container-page-about">
                 <div className="container-page-about__title">
-                    <h1>Bienvenido a mi rincón culinario</h1>
+                    <h1>BIENVENIDO A MI RINCÓN CULINARIO</h1>
                 </div>
                 <div className="container-page-about__text">
                     <p>
