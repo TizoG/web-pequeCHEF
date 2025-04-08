@@ -1,4 +1,4 @@
-from sqlalchemy import CheckConstraint, Column, Integer, String, Text, ForeignKey, TIMESTAMP
+from sqlalchemy import CheckConstraint, Column, Integer, String, Text, ForeignKey, TIMESTAMP, func
 from sqlalchemy.orm import relationship
 from .database import BASE
 
@@ -7,12 +7,12 @@ from .database import BASE
 class Recetas(BASE):
     __tablename__ = "recetas"
     id = Column(Integer, primary_key=True, autoincrement=True)
-    titulo = Column(String,  index=True, nullable=False)
+    titulo = Column(String(255),  index=True, nullable=False)
     descripcion = Column(Text, nullable=False)
     pasos = Column(Text, nullable=False)
     categoria_id = Column(Integer, ForeignKey(
         "categorias.id", ondelete="CASCADE"))
-    imagen = Column(String)
+    imagen = Column(Text)
 
     # Relaciones
     categoria = relationship("Categorias", back_populates="recetas")
@@ -28,7 +28,7 @@ class Recetas(BASE):
 class Categorias(BASE):
     __tablename__ = "categorias"
     id = Column(Integer, primary_key=True, autoincrement=True)
-    nombre = Column(String, unique=True, nullable=False)
+    nombre = Column(String(255), unique=True, nullable=False)
 
     # Relación con Recetas
     recetas = relationship(
@@ -41,8 +41,8 @@ class RecetaIngredientes(BASE):
     receta_id = Column(Integer, ForeignKey("recetas.id", ondelete="CASCADE"))
     ingrediente_id = Column(Integer, ForeignKey(
         "ingredientes.id", ondelete="CASCADE"))
-    cantidad = Column(String, nullable=False)
-    unidad = Column(String, nullable=False)
+    cantidad = Column(String(255), nullable=False)
+    unidad = Column(String(255), nullable=False)
 
     # Relaciones corregidas
     receta = relationship(
@@ -54,7 +54,7 @@ class RecetaIngredientes(BASE):
 class Ingredientes(BASE):
     __tablename__ = "ingredientes"
     id = Column(Integer, primary_key=True, autoincrement=True)
-    nombre = Column(String, unique=True, nullable=False)
+    nombre = Column(String(255), unique=True, nullable=False)
 
     # Relación con RecetaIngredientes
     receta_ingredientes = relationship(
@@ -64,7 +64,7 @@ class Ingredientes(BASE):
 class Alergias(BASE):
     __tablename__ = "alergias"
     id = Column(Integer, primary_key=True, autoincrement=True)
-    nombre = Column(String, unique=True, nullable=False)
+    nombre = Column(String(255), unique=True, nullable=False)
 
 
 class RecetaAlergias(BASE):
@@ -94,3 +94,10 @@ class Valoraciones(BASE):
 
     # Relaciones
     receta = relationship("Recetas", back_populates="valoraciones")
+
+
+class Suscriptores(BASE):
+    __tablename__ = "suscriptores"
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    email = Column(String(255), nullable=False, unique=True)
+    fecha_suscripcion = Column(TIMESTAMP, default=func.now())

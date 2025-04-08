@@ -5,12 +5,14 @@ from app.db.crud import actualizar_receta_con_ingredientes, insertar_receta_con_
 from app.api.router.recetas import router as receta_router
 from app.api.router.categorias import router as categoria_router
 from app.api.router.ingredientes import router as ingredientes_router
+from app.api.router.suscriptores import router as suscriptores
 from sqlalchemy.orm import sessionmaker
 
 app = FastAPI()
 app.include_router(receta_router)
 app.include_router(categoria_router)
 app.include_router(ingredientes_router)
+app.include_router(suscriptores)
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],  # 👈 Permite cualquier origen (cámbialo en producción)

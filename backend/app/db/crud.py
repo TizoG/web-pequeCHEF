@@ -1,6 +1,7 @@
+from email_validator import validate_email, EmailNotValidError
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
-from app.db.models import Categorias, Ingredientes, Recetas, RecetaIngredientes
+from app.db.models import Categorias, Ingredientes, Recetas, RecetaIngredientes, Suscriptores
 
 # Agregar una receta con sus ingredientes
 
@@ -150,3 +151,26 @@ def eliminar_receta(db: Session, receta_id: int):
     db.delete(receta)
     db.commit()
     return {"mensaje": "Receta eliminada con exito."}
+
+
+def suscriptor(db: Session, email: str):
+    try:
+        valid = validate_email(email)
+        email = valid.email
+    except EmailNotValidError as e:
+        raise HTTPException(
+            status_code=400,
+            detail=str(e)
+        )
+
+    db_suscriptor = db.query(Suscriptores).filter_by(email=email).first()
+    if db_suscriptor:
+        raise HTTPException(
+            status_code=400,
+            detail="Este correo ya existe en la base de datos."
+        )
+    nuevo_suscriptor = Suscriptores(email=email)
+    db.add(nuevo_suscriptor)
+    db.commit()
+    db.refresh(nuevo_suscriptor)
+    return nuevo_suscriptor

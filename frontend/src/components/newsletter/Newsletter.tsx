@@ -1,5 +1,41 @@
+import { useState } from 'react';
 import './newwsletter.css';
 export function Newsletter() {
+    const [isEmail, setEmail] = useState('');
+    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setEmail(e.target.value);
+    };
+    const handleEmail = async () => {
+        if (!isEmail.trim()) {
+            alert('Introduce un email');
+        }
+
+        try {
+            const response = await fetch('http://127.0.0.1:8000/suscribirse', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email: isEmail }),
+            });
+
+            if (!response.ok) {
+                alert('Error al suscribirte');
+                setEmail('');
+                throw new Error('Error al suscribirte');
+            }
+            const data = await response.json();
+            alert('Te has suscrito correctamente.');
+            setEmail('');
+        } catch (error) {
+            if (error instanceof Error) {
+                error.message;
+            } else {
+                ('Ocurrio un error desconocido');
+            }
+        }
+    };
+
     return (
         <section className="newsletter">
             <div className="newsletter__container">
@@ -17,8 +53,15 @@ export function Newsletter() {
                         className="input"
                         type="text"
                         placeholder="Ingresa tu correo"
+                        value={isEmail}
+                        onChange={handleEmailChange}
+                        onKeyDown={(e) => e.key === 'Enter' && handleEmail()}
                     />
-                    <button className="input-button" type="submit">
+                    <button
+                        className="input-button"
+                        type="submit"
+                        onClick={handleEmail}
+                    >
                         SUSCRIBETE
                     </button>
                 </div>

@@ -1,5 +1,5 @@
 from typing import List, Optional
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 
 
 class CategoriasSchema(BaseModel):
@@ -20,3 +20,7 @@ class RecetasSchema(BaseModel):
 
 class Respuestarecetas(BaseModel):
     recetas: List[RecetasSchema]
+
+
+class Suscripcion(BaseModel):
+    email: EmailStr

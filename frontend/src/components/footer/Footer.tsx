@@ -5,7 +5,7 @@ import { ImFacebook2 } from 'react-icons/im';
 import { RiInstagramFill } from 'react-icons/ri';
 import { FaYoutube } from 'react-icons/fa';
 import './footer.css';
-import { JSX } from 'react';
+import { JSX, useState } from 'react';
 
 const navLinks = [
     { label: 'HOME', href: '/' },
@@ -26,10 +26,11 @@ const iconos = [
     { icon: <RiInstagramFill className="icon-footer" /> },
     { icon: <FaYoutube className="icon-footer" /> },
 ];
+
 export function Footer() {
     return (
         <footer className="footer">
-            <div className="container">
+            <div className="container__footer">
                 <img
                     className="logo-footer"
                     src={footerlogo}
