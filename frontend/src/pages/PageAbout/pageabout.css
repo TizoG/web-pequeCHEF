@@ -1,0 +1,127 @@
+.container-section {
+    max-width: 1350px;
+    margin: auto;
+    margin-top: 80px;
+}
+
+.container-page-about {
+    display: flex;
+    gap: 50px;
+}
+.container-page-about__title {
+    max-width: 650px;
+}
+.container-page-about__title h1 {
+    font-size: 80px;
+    font-family: 'Montserrat', sans-serif;
+    color: #262522;
+    font-weight: bold;
+    margin: 0px;
+}
+
+.container-page-about__text {
+    display: flex;
+    align-items: center;
+}
+.container-page-about__text p {
+    font-size: 21px;
+    line-height: 140%;
+    opacity: 60%;
+    margin: 0px;
+    color: #262522;
+}
+
+.container-page-about__mi-historia {
+    display: flex;
+    gap: 50px;
+    margin-top: 80px;
+}
+.container-page-about__mi-historia img {
+    width: 620px;
+    height: 480px;
+    border-radius: 12px;
+}
+.container-page-about__mi-historia h2 {
+    font-size: 40px;
+    color: #262522;
+    font-weight: bold;
+    margin: 0px;
+    margin-bottom: 15px;
+}
+.container-page-about__mi-historia p {
+    font-size: 21px;
+    line-height: 140%;
+    opacity: 60%;
+    margin: 0px;
+    color: #262522;
+}
+
+.container-page-about__inspiracion {
+    display: flex;
+    margin-top: 80px;
+    border-radius: 12px;
+    padding-block: 30px;
+    border: 1px solid rgba(179, 175, 167, 0.8);
+}
+
+.container-page-about__inspiracion__text {
+    padding: 0px 50px;
+    border-right: 1px solid rgba(179, 175, 167, 0.8);
+}
+
+.container-page-about__inspiracion__text h2 {
+    font-size: 40px;
+    color: #262522;
+    font-weight: bold;
+    margin: 0px;
+    margin-bottom: 15px;
+}
+
+.container-page-about__inspiracion__text__strong {
+    font-size: 18px;
+}
+.container-page-about__inspiracion__text strong {
+    color: #ee6352;
+}
+.container-page-about__inspiracion__text p {
+    font-size: 18px;
+    line-height: 140%;
+    opacity: 60%;
+    margin: 0px;
+    color: #262522;
+    margin-bottom: 20px;
+}
+.container-page-about__inspiracion__text li {
+    font-size: 18px;
+    line-height: 140%;
+    margin: 0px;
+    color: rgba(38, 37, 34, 0.5);
+}
+.container-page-about__inspiracion__img {
+    padding: 0px 50px;
+}
+
+.conectemos {
+    display: flex;
+    flex-direction: column;
+}
+
+.conectemos h2 {
+    font-size: 40px;
+
+    color: #262522;
+    font-weight: bold;
+    margin: 0px;
+    margin-bottom: 15px;
+    margin-top: 80px;
+    text-align: center;
+}
+
+.conectemos p {
+    font-size: 18px;
+    line-height: 140%;
+    opacity: 60%;
+    margin: 0px;
+    color: #262522;
+    margin-bottom: 20px;
+}
