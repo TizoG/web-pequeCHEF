@@ -2,7 +2,7 @@ from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 from app.db.database import session_local
-from app.db.models import Ingredientes, RecetaIngredientes, Recetas
+from app.db.models import Categorias, Ingredientes, RecetaIngredientes, Recetas
 from app.schemas import RecetasSchema, Respuestarecetas
 from app.db.crud import actualizar_receta_con_ingredientes, eliminar_receta
 
@@ -23,7 +23,8 @@ def all_recetas(id_categoria: Optional[List[int]] = None, nombre: Optional[str] 
     query = db.query(Recetas)
 
     if id_categoria:
-        query = query.filter(Recetas.categoria_id.in_(id_categoria))
+        query = query.filter(Recetas.categoria.any(
+            Categorias.id.in_(id_categoria)))
 
     if nombre:
         query = query.filter(Recetas.titulo.ilike(f'%{nombre}%'))
@@ -42,8 +43,9 @@ def all_recetas(id_categoria: Optional[List[int]] = None, nombre: Optional[str] 
             id=receta.id,
             titulo=receta.titulo,
             descripcion=receta.descripcion,
+            descripcion_original=receta.descripcion_original,
             pasos=receta.pasos,
-            categoria_id=receta.categoria_id,
+            categorias=[categoria.nombre for categoria in receta.categoria],
             imagen=receta.imagen
         ))
     return Respuestarecetas(recetas=recetas_response)
@@ -52,7 +54,7 @@ def all_recetas(id_categoria: Optional[List[int]] = None, nombre: Optional[str] 
 @router.get("/recetas/categoria/{id_categoria}")
 def recetas_por_categoria(id_categoria: int, db: Session = Depends(get_db)):
     db_recetas = db.query(Recetas).filter(
-        Recetas.categoria_id == id_categoria).all()
+        Recetas.categoria.any(Categorias.id == id_categoria)).all()
 
     if not db_recetas:
         raise HTTPException(
@@ -115,10 +117,13 @@ def recetas_id(receta_id: int, db: Session = Depends(get_db)):
         "id": db_recetas.id,
         "titulo": db_recetas.titulo,
         "descripcion": db_recetas.descripcion,
-        "categoria": db_recetas.categoria,
+        "descripcion_original": db_recetas.descripcion_original,
+        "categoria": [categoria.nombre for categoria in db_recetas.categoria],
         "imagen": db_recetas.imagen,
         "pasos": db_recetas.pasos,
         "ingredientes": lista_ingredientes,
+        "equipamiento": db_recetas.equipamiento,
+        "valores_nutricionales": db_recetas.valores_nutricionales
     }
 
 
