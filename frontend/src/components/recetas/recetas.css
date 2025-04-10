@@ -111,7 +111,7 @@
 
 .card-receta__content__button {
     margin: 0px;
-    margin-top: auto;
+    margin-top: 20px;
     display: flex;
     justify-content: flex-end;
 }

@@ -93,7 +93,7 @@ def insertar_receta(
             "titulo": receta.titulo,
             "descripcion": receta.descripcion,
             # Listado de categorías
-            "categorias": [c.nombre for c in receta.categoria],
+            "categorias": [c.nombre for c in receta.categorias],
             "ingredientes": ingredientes,
             "equipamiento": receta.equipamiento,
             "porciones": receta.porciones

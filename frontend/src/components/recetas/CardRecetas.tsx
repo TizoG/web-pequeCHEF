@@ -17,7 +17,11 @@ export function CardRecetas({
 }: Props) {
     return (
         <div className="card-receta">
-            <img src={imagen} alt="Imagen de la receta" className="img" />
+            <img
+                src={`http://localhost:8000/${imagen}`}
+                alt="Imagen de la receta"
+                className="img"
+            />
             <div className="card-receta__content">
                 <h3 className="card-receta__content__h3">{titulo}</h3>
                 <p className="card-receta__content__p">{description}</p>

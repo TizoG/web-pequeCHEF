@@ -24,6 +24,9 @@ type Receta = {
     valores_nutricionales: {
         [key: string]: { cantidad: string; unidad: string };
     };
+    tiempo_cocina: string;
+    dificultad: 'Fácil' | 'Intermedio' | 'Difícil';
+    porciones: number;
 };
 export function DetalleReceta() {
     const { id } = useParams<{ id: string }>();
@@ -91,15 +94,15 @@ export function DetalleReceta() {
                                 <i>
                                     <MdTimer />
                                 </i>
-                                1 HORA <span>·</span>
+                                {receta.tiempo_cocina} <span>·</span>
                                 <i>
                                     <FaWeightHanging />
                                 </i>
-                                DIFICIL <span>·</span>
+                                {receta.dificultad} <span>·</span>
                                 <i>
                                     <TbToolsKitchen3 />
                                 </i>
-                                4 PERSONAS
+                                {receta.porciones} PERSONAS
                             </p>
                         </div>
                         <img

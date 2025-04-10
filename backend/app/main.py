@@ -1,3 +1,4 @@
+from sqlalchemy.sql import text
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
@@ -8,6 +9,8 @@ from app.api.router.categorias import router as categoria_router
 from app.api.router.ingredientes import router as ingredientes_router
 from app.api.router.suscriptores import router as suscriptores
 from sqlalchemy.orm import sessionmaker
+
+from app.db.models import Categorias, RecetaCategoria, RecetaIngredientes, Recetas
 
 
 app = FastAPI()
@@ -34,40 +37,35 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 def insertar_recetas():
     """
-    Crea una receta apta para niños y la inserta en la base de datos.
+# Crea una receta apta para niños y la inserta en la base de datos.
 
-    Campos requeridos:
-    - Título, descripción, pasos, imagen, ingredientes, equipamiento, valores nutricionales.
-    - Tags para clasificar, dificultad, tiempo de cocina, porciones y tips.
+# Campos requeridos:
+#    - Título, descripción, pasos, imagen, ingredientes, equipamiento, valores nutricionales.
+#   - Tags para clasificar, dificultad, tiempo de cocina, porciones y tips.
 
-    Retorna:
-    - Objeto receta insertado en la base de datos.
-    """
-    nueva_receta = insertar_receta(
-        db=db,
-        categoria_nombre=[
-            "carnes",
-            "comida",
-        ],
+#  Retorna:
+# - Objeto receta insertado en la base de datos.
+"""
+    nueva_receta = Recetas(
+
         titulo="Pollo Mágico con Limón y Ajo",
         descripcion=(
             "Un delicioso y tierno pollo marinado en limón y ajo, cocinado a la perfección para sorprender y enamorar a los más pequeños con sabores frescos y naturales."
         ),
         descripcion_original=(
-            """
-            Imagine un suculento pollo impregnado de las vibrantes notas 
-            de limón y el aromático susurro del ajo. Es una 
-            sinfonía de sabores pensada para encantar el paladar infantil,
-            donde cada trocito cuenta una historia de creatividad y cariño. 
-            Mientras el horno se calienta y la cocina se inunda de un 
-            delicioso aroma cítrico, el ambiente se transforma en un 
-            escenario de pequeñas grandes aventuras. Esta receta, además 
-            de nutritiva, es una obra de arte culinaria que invita a los 
-            niños a explorar, a jugar y a enamorarse de la cocina. Con cada 
-            mordisco, descubren que preparar comida saludable puede ser una 
-            aventura tan divertida como sabrosa, dejando una huella mágica 
-            en cada sonrisa. 
-            """
+            """ Imagine un suculento pollo impregnado de las vibrantes notas
+de limón y el aromático susurro del ajo. Es una
+sinfonía de sabores pensada para encantar el paladar infantil,
+donde cada trocito cuenta una historia de creatividad y cariño.
+Mientras el horno se calienta y la cocina se inunda de un
+delicioso aroma cítrico, el ambiente se transforma en un
+escenario de pequeñas grandes aventuras. Esta receta, además
+de nutritiva, es una obra de arte culinaria que invita a los
+niños a explorar, a jugar y a enamorarse de la cocina. Con cada
+mordisco, descubren que preparar comida saludable puede ser una
+aventura tan divertida como sabrosa, dejando una huella mágica
+en cada sonrisa.
+"""
         ),
         pasos={
             "Preparar la marinada": "En un bowl, mezcla el jugo de limón, el ajo picado, el aceite de oliva, el orégano, sal y pimienta.",
@@ -82,18 +80,7 @@ def insertar_recetas():
             "Marinar el pollo": "Cortar el pollo en trocitos adecuados y marinarlo durante al menos 30 minutos en una mezcla de jugo de limón, ajo picado (en poca cantidad, adaptado al gusto infantil) y un toque de aceite de oliva.",
             "Precalentar el horno": "A 200°C (392°F)."
         },
-        ingredientes=[
-            {"nombre": "Pechuga de pollo (sin piel y en trozos pequeños)",
-             "cantidad": 500, "unidad": "gramos"},
-            {"nombre": "Jugo de limón", "cantidad": 1, "unidad": "unidad"},
-            {"nombre": "Ajo", "cantidad": 2, "unidad": "dientes"},
-            {"nombre": "Aceite de oliva virgen extra",
-                "cantidad": 2, "unidad": "cucharadas"},
-            {"nombre": "Sal y pimienta ", "cantidad": 1, "unidad": "al gusto"},
-            {"nombre": "Oregano seco ", "cantidad": 1, "unidad": "cucharada"},
-            {"nombre": "Limón ", "cantidad": 3, "unidad": "rodajas"},
-            {"nombre": "Hoja de perejil ", "cantidad": 2, "unidad": "hojas"},
-        ],
+
         equipamiento=[
             "Bowl", "tabla de cortar y cuchillo", "Fuente para horno", "Cuchara medidora", "Horno"
         ],
@@ -104,20 +91,26 @@ def insertar_recetas():
             "carbohidratos": {"cantidad": 5, "unidad": "g"},
             "fibra": {"cantidad": 1, "unidad": "g"}
         },
-        tiempo_cocina={
-            "Preparación": "10-15 minutos",
-            "Horneado": "20-25 minutos",
-            "Total": "35-40 minutos"
-        },
+        tiempo_cocina="35-40 minutos",
         dificultad="Fácil",
         tags=["Pollo", "Limon", "Ajo"],
         porciones=4,
         tips=[
             "Acompaña con arroz integral o puré de papas para variar las comidas.",
             "Utiliza platos coloridos y presenta las rodajas de limón formando caritas o figuras sencillas que incentiven la creatividad."
-        ]
-
+        ],
     )
+    # Obtener las categorias existentes y asignarlas a la receta
+    categorias = db.query(Categorias).filter(
+        Categorias.nombre.in_(["all", "carnes", "comida"])
+    ).all()
+    # Asignar categorias usando la tabla intermedia
+    for categoria in categorias:
+        nueva_receta.categorias.append(
+            RecetaCategoria(categoria=categoria)
+        )
+
+    # Insertar la receta
     try:
         db.add(nueva_receta)
         db.commit()
@@ -127,6 +120,33 @@ def insertar_recetas():
         print(f"Error al insertar receta: {e}")
         return None
 
+    ingredientes = [
+        {"nombre": "Pechuga de pollo (sin piel y en trozos pequeños)",
+         "cantidad": 500, "unidad": "gramos"},
+        {"nombre": "Jugo de limón", "cantidad": 1, "unidad": "unidad"},
+        {"nombre": "Ajo", "cantidad": 2, "unidad": "dientes"},
+        {"nombre": "Aceite de oliva virgen extra",
+         "cantidad": 2, "unidad": "cucharadas"},
+        {"nombre": "Sal y pimienta ", "cantidad": 1, "unidad": "al gusto"},
+        {"nombre": "Oregano seco ", "cantidad": 1, "unidad": "cucharada"},
+        {"nombre": "Limón ", "cantidad": 3, "unidad": "rodajas"},
+        {"nombre": "Hoja de perejil ", "cantidad": 2, "unidad": "hojas"},
+    ]
+    try:
+        for ingrediente in ingredientes:
+            nuevo_ingrediente = RecetaIngredientes(
+                receta_id=nueva_receta.id,
+                nombre=ingrediente["nombre"],
+                cantidad=ingrediente["cantidad"],
+                unidad=ingrediente["unidad"]
+            )
+        db.add(nuevo_ingrediente)
+        db.commit()
+    except Exception as e:
+        db.rollback()
+        print(f"Error al insertar ingredientes: {e}")
+        return None
+
     return nueva_receta
 
 
@@ -134,18 +154,39 @@ def insertar_recetas():
 Eliminamos las tablas de la base de datos
 """
 
-"""
+# Función para eliminar tablas (con manejo de relaciones)
+
+
 def eliminar_tablas():
-    BASE.metadata.drop_all(bind=engine)
+    try:
+        # Eliminar claves foráneas
+        with engine.connect() as conn:
+            conn.execute(text(
+                "ALTER TABLE recetas_categorias DROP FOREIGN KEY recetas_categorias_ibfk_1"))
+            conn.execute(text(
+                "ALTER TABLE recetas_categorias DROP FOREIGN KEY recetas_categorias_ibfk_2"))
 
-    eliminar_tablas()
+        # Eliminar todas las tablas
+        BASE.metadata.drop_all(bind=engine)
+        print("Tablas eliminadas correctamente.")
+    except Exception as e:
+        print(f"Error al eliminar tablas: {e}")
 
 
+# Función para crear tablas
 def crear_tablas():
-    BASE.metadata.create_all(bind=engine)
+    try:
+        BASE.metadata.create_all(bind=engine)
+        print("Tablas creadas correctamente.")
+    except Exception as e:
+        print(f"Error al crear tablas: {e}")
 
-    crear_tablas()
-"""
+
+# Inicialización (eliminar y crear tablas al iniciar)
+if __name__ == "__main__":
+    insertar_recetas()
+
+    print("¡Base de datos inicializada correctamente!")
 # Cerrar la sesión
 db.close()
 

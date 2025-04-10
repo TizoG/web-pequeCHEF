@@ -1,6 +1,6 @@
 from sqlalchemy import JSON, CheckConstraint, Column, Enum, Integer, String, Table, Text, ForeignKey, TIMESTAMP, func
 from sqlalchemy.orm import relationship
-from .database import BASE
+from database import BASE
 
 
 # Creamos las tablas
@@ -15,7 +15,7 @@ class Recetas(BASE):
     preparacion_previa = Column(JSON, nullable=True)
     equipamiento = Column(JSON, nullable=True)
     valores_nutricionales = Column(JSON, nullable=False)
-    tiempo_cocina = Column(JSON, nullable=False)
+    tiempo_cocina = Column(String(100), nullable=False)
     dificultad = Column(Enum("Fácil", "Intermedio", "Difícil",
                         name="nivel_dificultad"), nullable=False)
     tags = Column(JSON, nullable=True)
@@ -24,11 +24,7 @@ class Recetas(BASE):
 
     # Relaciones
     # Relacion Many-to-Many con Categorias
-    categoria = relationship(
-        "Categorias",
-        secondary="recetas_categorias",
-        back_populates="recetas"
-    )
+    categorias = relationship("RecetaCategoria", back_populates="receta")
     receta_ingredientes = relationship(
         "RecetaIngredientes", back_populates="receta", cascade="all, delete, delete-orphan", lazy="joined"
     )
@@ -45,26 +41,22 @@ class Categorias(BASE):
     nombre = Column(String(255), unique=True, nullable=False)
     parent_id = Column(Integer, ForeignKey("categorias.id"), nullable=True)
     # Relación Many-to-Many con Recetas a traves de una tabla intermedia
-    recetas = relationship(
-        "Recetas",
-        secondary="recetas_categorias",
-        back_populates="categoria",
-        cascade="all, delete"
-    )
+    recetas = relationship("RecetaCategoria", back_populates="categoria")
     subcategorias = relationship(
         "Categorias", backref="parent", remote_side=[id])
 
 
 # Tabla intermedia para la relacion Many-to-Many
-recetas_categorias = Table(
-    "recetas_categorias",
-    BASE.metadata,
-    Column("receta_id", Integer, ForeignKey(
-        "recetas.id", ondelete="CASCADE"), primary_key=True),
-    Column("categoria_id", Integer, ForeignKey(
+class RecetaCategoria(BASE):
+    __tablename__ = "recetas_categorias"
+    receta_id = Column(Integer, ForeignKey(
+        "recetas.id", ondelete="CASCADE"), primary_key=True)
+    categoria_id = Column(Integer, ForeignKey(
         "categorias.id", ondelete="CASCADE"), primary_key=True)
 
-)
+    # Relaciones
+    receta = relationship("Recetas", back_populates="categorias")
+    categoria = relationship("Categorias", back_populates="recetas")
 
 
 class RecetaIngredientes(BASE):
