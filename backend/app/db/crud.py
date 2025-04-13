@@ -6,37 +6,58 @@ from app.db.models import Categorias, Ingredientes, Recetas, RecetaIngredientes,
 # Agregar una receta con sus ingredientes
 
 
-def insertar_receta_con_ingredientes(
+def insertar_receta(
     db: Session,
-    categoria_nombre: str,
+    categoria_nombre: list,
     titulo: str,
     descripcion: str,
-    pasos: str,
+    descripcion_original: str,
+    pasos: dict,
     imagen: str,
-    lista_ingredientes: list
+    preparacion_previa: dict,
+    ingredientes: list,
+    equipamiento: list,
+    valores_nutricionales: dict,
+    tiempo_cocina: dict,
+    dificultad: str,
+    tags: list,
+    porciones: int,
+    tips: list
 ):
     # Verificar o crear la categoría
-    categoria = db.query(Categorias).filter_by(nombre=categoria_nombre).first()
-    if not categoria:
-        categoria = Categorias(nombre=categoria_nombre)
-        db.add(categoria)
-        db.commit()
-        db.refresh(categoria)
+    categorias = []
+    for nombre_categoria in categoria_nombre:
+        categoria = db.query(Categorias).filter_by(
+            nombre=nombre_categoria).first()
+        if not categoria:
+            categoria = Categorias(nombre=nombre_categoria)
+            db.add(categoria)
+            db.commit()
+            db.refresh(categoria)
+        categorias.append(categoria)
 
     # Crear la receta vinculada a la categoría
     receta = Recetas(
         titulo=titulo,
         descripcion=descripcion,
+        descripcion_original=descripcion_original,
         pasos=pasos,
-        categoria_id=categoria.id,
-        imagen=imagen
+        imagen=imagen,
+        preparacion_previa=preparacion_previa,
+        equipamiento=equipamiento,
+        valores_nutricionales=valores_nutricionales,
+        tiempo_cocina=tiempo_cocina,
+        dificultad=dificultad,
+        tags=tags,
+        porciones=porciones,
+        tips=tips
     )
     db.add(receta)
     db.commit()
     db.refresh(receta)  # Obtener el ID asignado
 
     # Manejar los ingredientes
-    for data_ingrediente in lista_ingredientes:
+    for data_ingrediente in ingredientes:
         # Extraemos nombre, cantidad y unidad
         nombre = data_ingrediente["nombre"]
         # si no ponemos nada introducimos valor por defecto
@@ -70,8 +91,12 @@ def insertar_receta_con_ingredientes(
         "mensaje": "Receta insertada con éxito",
         "receta": {
             "titulo": receta.titulo,
-            "categoria": categoria.nombre,
-            "ingredientes": lista_ingredientes
+            "descripcion": receta.descripcion,
+            # Listado de categorías
+            "categorias": [c.nombre for c in receta.categorias],
+            "ingredientes": ingredientes,
+            "equipamiento": receta.equipamiento,
+            "porciones": receta.porciones
         }
     }
 

@@ -35,15 +35,17 @@
 }
 .container__contenido {
     display: flex;
+    justify-content: space-between;
     gap: 56px;
 }
 .container__post-receta {
     max-width: 645px;
-    margin-left: 175px;
+    margin-left: 75px;
     text-align: left;
 }
 .receta__descripcion__posterior {
     text-align: left;
+    margin-top: 40px;
     width: 560px;
     font-size: 16px;
     line-height: 140%;
@@ -62,9 +64,12 @@
     color: #333333;
     opacity: 80%;
 }
+.pasos {
+    margin-top: 40px;
+}
 .pasos__title {
     margin-top: 40px;
-    margin-bottom: 16px;
+    margin-bottom: 0px;
     color: #ee6352;
     font-size: 18px;
     font-family: 'Montserrat', sans-serif;
@@ -81,6 +86,7 @@
     padding-top: 40px;
     padding-bottom: 16px;
     max-width: 460px;
+    margin-right: 16px;
 }
 .container__ingredientes {
     text-align: left;
