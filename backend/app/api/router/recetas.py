@@ -2,10 +2,10 @@ from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import func
 from sqlalchemy.orm import Session
-from app.db.database import session_local
-from app.db.models import Categorias, Ingredientes, RecetaIngredientes, Recetas
-from app.schemas import RecetasSchema, Respuestarecetas
-from app.db.crud import actualizar_receta_con_ingredientes, eliminar_receta
+from db.database import session_local
+from db.models import Categorias, Ingredientes, RecetaIngredientes, Recetas
+from schemas import RecetasSchema, Respuestarecetas
+from db.crud import actualizar_receta_con_ingredientes, eliminar_receta
 
 router = APIRouter()
 

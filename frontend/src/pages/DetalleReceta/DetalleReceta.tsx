@@ -131,7 +131,30 @@ export function DetalleReceta() {
                                                     </p>
                                                     <ul>
                                                         <li className="pasos__li">
-                                                            {value}
+                                                            {Array.isArray(
+                                                                value
+                                                            ) ? (
+                                                                <ul>
+                                                                    {value.map(
+                                                                        (
+                                                                            item,
+                                                                            index
+                                                                        ) => (
+                                                                            <li
+                                                                                key={
+                                                                                    index
+                                                                                }
+                                                                            >
+                                                                                {
+                                                                                    item
+                                                                                }
+                                                                            </li>
+                                                                        )
+                                                                    )}
+                                                                </ul>
+                                                            ) : (
+                                                                value
+                                                            )}
                                                         </li>
                                                     </ul>
                                                 </div>

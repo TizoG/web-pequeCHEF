@@ -1,4 +1,4 @@
-from typing import List, Optional, Dict
+from typing import List, Optional, Dict, Union
 from pydantic import BaseModel, EmailStr
 
 
@@ -11,7 +11,7 @@ class RecetasSchema(BaseModel):
     id: int
     titulo: str
     descripcion: str
-    pasos: Dict[str, str]
+    Dict[str, Union[str, List[str]]]
     categorias: List[str]
     imagen: str
 

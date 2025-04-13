@@ -10,14 +10,14 @@ from sqlalchemy.ext.declarative import declarative_base
 load_dotenv()
 
 # TODO: Porque no funciona el env?
-user = os.getenv("USER", "root")
-password = os.getenv("PASSWORD", "tirado")
-bbdd = os.getenv("BBDD", "pequechef")
-host = os.getenv("HOST", "127.0.0.1")
-port = os.getenv("PORT", "3306")
+user = os.getenv("USER")
+password = os.getenv("PASSWORD")
+bbdd = os.getenv("BBDD")
+host = os.getenv("HOST")
+port = os.getenv("PORT")
 
 # Construimos la url de la bbdd
-URL_BD = f"mysql+pymysql://{user}:{password}@{host}:{port}/{bbdd}"
+URL_BD = f"postgresql://{user}:{password}@{host}:{port}/{bbdd}"
 
 # Creamos el motor de conexión
 # engine = create_engine(URL_BD, pool_pre_ping=True)

@@ -29,7 +29,7 @@ const coleccionLinks = [
     { href: 'all', text: 'ALL' },
     { href: 'vegan', text: 'VEGAN' },
     { href: 'carnes', text: 'CARNES' },
-    { href: 'lunch', text: 'LUNCH' },
+    { href: 'pastas', text: 'PASTAS' },
     { href: 'dinner', text: 'DINNER' },
     { href: 'dessert', text: 'DESSERT' },
     { href: 'bite', text: 'QUICK BITE!' },
