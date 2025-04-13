@@ -2,10 +2,10 @@ from typing import List, Optional
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import func
 from sqlalchemy.orm import Session
-from db.database import session_local
-from db.models import Categorias, Ingredientes, RecetaIngredientes, Recetas
-from schemas import RecetasSchema, Respuestarecetas
-from db.crud import actualizar_receta_con_ingredientes, eliminar_receta
+from app.db.database import session_local
+from app.db.models import Categorias, Ingredientes, RecetaIngredientes, Recetas, RecetaCategoria
+from app.schemas import CategoriasSchema, RecetasSchema, Respuestarecetas
+from app.db.crud import actualizar_receta_con_ingredientes, eliminar_receta
 
 router = APIRouter()
 
@@ -40,45 +40,33 @@ def all_recetas(id_categoria: Optional[List[int]] = None, nombre: Optional[str] 
 
     recetas_response = []
     for receta in db_recetas:
+        categorias_completas = [
+            Categorias(id=c.id, nombre=c.nombre) for c in receta.categorias
+        ]
         recetas_response.append(RecetasSchema(
             id=receta.id,
             titulo=receta.titulo,
             descripcion=receta.descripcion,
             descripcion_original=receta.descripcion_original,
             pasos=receta.pasos,
-            categorias=[
-                relacion.categoria.nombre for relacion in receta.categorias],
-            imagen=receta.imagen
+            categorias=categorias_completas,
+            imagen=receta.imagen,
+            tiempo_cocina=receta.tiempo_cocina
         ))
-    return Respuestarecetas(recetas=recetas_response)
+    return {"recetas": recetas_response}
 
 
-@router.get("/recetas/categoria/{categoria_nombre}")
+@router.get("/recetas/categoria/{categoria_nombre}", response_model=Respuestarecetas)
 def recetas_por_categoria(categoria_nombre: str, db: Session = Depends(get_db)):
-    db_recetas = db.query(Recetas).join(Recetas.categorias).join(Categorias).filter(
-        func.lower(Categorias.nombre) == categoria_nombre.lower()
-    ).all()
+    db_recetas = db.query(Recetas).filter(Recetas.recetas_categorias.any(
+        RecetaCategoria.categoria.has(Categorias.nombre == categoria_nombre))).all()
 
     if not db_recetas:
         raise HTTPException(
             status_code=404, detail="No tenemos ninguna receta."
         )
 
-    return Respuestarecetas(
-        recetas=[
-            RecetasSchema(
-                id=receta.id,
-                titulo=receta.titulo,
-                descripcion=receta.descripcion,
-                pasos=receta.pasos,
-                # Ajuste aquí
-                categorias=[
-                    relacion.categoria.nombre for relacion in receta.categorias],
-                imagen=receta.imagen
-            )
-            for receta in db_recetas
-        ]
-    )
+    return {"recetas": db_recetas}
 
 
 @router.put("/recetas/{receta_id}")
@@ -86,6 +74,8 @@ def actualizar_receta(
     receta_id: int,
     receta_data: RecetasSchema,
     db: Session = Depends(get_db)
+
+
 ):
     return actualizar_receta_con_ingredientes(
         db,
@@ -95,7 +85,8 @@ def actualizar_receta(
         receta_data.descripcion,
         receta_data.pasos,
         receta_data.imagen,
-        receta_data.lista_ingredientes
+        receta_data.lista_ingredientes,
+        receta_data.tiempo_cocina
     )
 
 
@@ -113,7 +104,7 @@ def recetas_id(receta_id: int, db: Session = Depends(get_db)):
             status_code=404, detail="No tenemos ninguna receta."
         )
 
-    # Buscamos los ingredientes de la receta
+        # Buscamos los ingredientes de la receta
     ingredientes = (
         db.query(Ingredientes.nombre, RecetaIngredientes.cantidad, RecetaIngredientes.unidad).join(
             RecetaIngredientes, RecetaIngredientes.ingrediente_id == Ingredientes.id).filter(
@@ -130,12 +121,14 @@ def recetas_id(receta_id: int, db: Session = Depends(get_db)):
 
         for ing in ingredientes
     ]
+    categorias = [{"id": c.id, "nombre": c.nombre}
+                  for c in db_recetas.categorias]
     return {
         "id": db_recetas.id,
         "titulo": db_recetas.titulo,
         "descripcion": db_recetas.descripcion,
         "descripcion_original": db_recetas.descripcion_original,
-        "categoria": [relacion.categoria.nombre for relacion in db_recetas.categorias],
+        "categoria": categorias,
         "imagen": db_recetas.imagen,
         "pasos": db_recetas.pasos,
         "ingredientes": lista_ingredientes,
@@ -143,16 +136,32 @@ def recetas_id(receta_id: int, db: Session = Depends(get_db)):
         "valores_nutricionales": db_recetas.valores_nutricionales,
         "tiempo_cocina": db_recetas.tiempo_cocina,
         "dificultad": db_recetas.dificultad,
-        "porciones": db_recetas.porciones
+        "porciones": db_recetas.porciones,
+
     }
 
 
 @router.get("/recetas/search/{titulo}")
 def nombre_receta(titulo: str, db: Session = Depends(get_db)):
+
     db_recetas = db.query(Recetas).filter(
         Recetas.titulo.ilike(f"%{titulo}%")).all()
+
     if not db_recetas:
         raise HTTPException(
             status_code=404, detail="No tenemos ninguna receta."
         )
-    return Respuestarecetas(recetas=[RecetasSchema(**receta.__dict__) for receta in db_recetas])
+    return Respuestarecetas(recetas=[
+        RecetasSchema(
+            id=receta.id,
+            titulo=receta.titulo,
+            descripcion=receta.descripcion,
+            descripcion_original=receta.descripcion_original,
+            pasos=receta.pasos,
+            categorias=[CategoriasSchema(id=c.id, nombre=c.nombre)
+                        for c in receta.categorias],
+            imagen=receta.imagen,
+            tiempo_cocina=receta.tiempo_cocina
+        )
+        for receta in db_recetas
+    ])

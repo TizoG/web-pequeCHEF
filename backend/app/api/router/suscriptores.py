@@ -1,11 +1,11 @@
 from fastapi import FastAPI, Depends, APIRouter, HTTPException
 from sqlalchemy.orm import Session
-from db.database import session_local
-from db.crud import suscriptor
-from db.models import Suscriptores
+from app.db.database import session_local
+from app.db.crud import suscriptor
+from app.db.models import Suscriptores
 from sqlalchemy.orm import Session
-from db.database import session_local
-from schemas import Suscripcion
+from app.db.database import session_local
+from app.schemas import Suscripcion
 
 app = FastAPI()
 

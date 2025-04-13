@@ -1,7 +1,7 @@
 from email_validator import validate_email, EmailNotValidError
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
-from db.models import Categorias, Ingredientes, Recetas, RecetaIngredientes, Suscriptores
+from app.db.models import Categorias, Ingredientes, Recetas, RecetaIngredientes, Suscriptores
 
 # Agregar una receta con sus ingredientes
 

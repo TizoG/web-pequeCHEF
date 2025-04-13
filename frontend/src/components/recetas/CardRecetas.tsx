@@ -18,7 +18,11 @@ export function CardRecetas({
     return (
         <div className="card-receta">
             <img
-                src={`http://localhost:8000/${imagen}`}
+                src={
+                    imagen.startsWith('http')
+                        ? imagen
+                        : `http://localhost:8000/${imagen}`
+                }
                 alt="Imagen de la receta"
                 className="img"
             />
@@ -27,6 +31,7 @@ export function CardRecetas({
                 <p className="card-receta__content__p">{description}</p>
                 <div className="card-receta__content__button">
                     <p>{tiempo}</p>
+
                     <Button
                         text="VER RECETA"
                         className="card-button"

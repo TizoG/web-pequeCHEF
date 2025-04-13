@@ -106,9 +106,13 @@ export function DetalleReceta() {
                             </p>
                         </div>
                         <img
-                            className="receta__imagen"
-                            src={`http://localhost:8000/${receta.imagen}`}
+                            src={
+                                receta.imagen.startsWith('http')
+                                    ? receta.imagen
+                                    : `http://localhost:8000/${receta.imagen}`
+                            }
                             alt="Imagen de la receta"
+                            className="receta__imagen"
                         />
                         <div className="container__contenido">
                             <div className="container__post-receta">

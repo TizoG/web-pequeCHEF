@@ -2,13 +2,13 @@ from sqlalchemy.sql import text
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-from db.database import BASE, session_local, engine
-from api.router.recetas import router as receta_router
-from api.router.categorias import router as categoria_router
-from api.router.ingredientes import router as ingredientes_router
-from api.router.suscriptores import router as suscriptores
+from app.db.database import BASE, session_local, engine
+from app.api.router.recetas import router as receta_router
+from app.api.router.categorias import router as categoria_router
+from app.api.router.ingredientes import router as ingredientes_router
+from app.api.router.suscriptores import router as suscriptores
 from sqlalchemy.orm import sessionmaker
-from db.models import Categorias, Ingredientes, RecetaCategoria, RecetaIngredientes, Recetas
+from app.db.models import Categorias, Ingredientes, RecetaCategoria, RecetaIngredientes, Recetas
 
 app = FastAPI()
 app.include_router(receta_router)
@@ -26,8 +26,6 @@ app.add_middleware(
 
 session_local = sessionmaker(autocommit=False, bind=engine, autoflush=False)
 db = session_local()
-
-app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
 def insertar_recetas():

@@ -82,7 +82,7 @@
 }
 .img {
     width: 100%;
-    height: auto;
+    max-height: 234px;
     object-fit: cover;
     border-top-left-radius: 24px;
     border-top-right-radius: 24px;
@@ -94,6 +94,7 @@
     flex-direction: column;
     height: 100%;
     flex-grow: 1;
+    position: relative;
 }
 
 .card-receta__content__h3 {
@@ -125,6 +126,9 @@
     transition: all 0.2s ease;
     text-decoration: none;
     color: #262522;
+    position: absolute;
+    bottom: 16px;
+    right: 24px;
 }
 
 .card-button:hover {
