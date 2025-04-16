@@ -4,7 +4,7 @@
     display: flex;
     flex-direction: column;
     width: 1350px;
-
+    /*background-color: #c4e5fc;*/ /* si ponemos este fondo quitamos el border*/
     border-radius: 32px;
     border: 1px solid rgba(38, 37, 34, 0.16);
 }

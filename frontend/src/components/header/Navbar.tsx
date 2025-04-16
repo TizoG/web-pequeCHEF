@@ -1,7 +1,7 @@
 import './navbar.css';
 import logoo from '../../assets/logoo.png';
 import { IoSearch } from 'react-icons/io5';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // Componente reutilizable para los enlaces del Navbar
@@ -37,15 +37,14 @@ export function NavbarItem({
 
 // Array con los elementos del Navbar
 const navLinks = [
-    { label: 'HOME', href: '/' },
-    { label: 'RECIPES', href: '/recetas' },
-    { label: 'COOKING TIPS', href: '/tiposcocina', disabled: true },
-    { label: 'ABOUT US', href: '/aboutus' },
+    { label: 'INICIO', href: '/' },
+    { label: 'RECETAS', href: '/recetas' },
+    { label: 'TIPOS DE COCINA', href: '/tiposcocina', disabled: true },
+    { label: 'NOSOTROS', href: '/aboutus' },
 ];
 export function Navbar() {
     const [search, setSearch] = useState('');
     const navigate = useNavigate();
-    const [resultados, setResultados] = useState([]);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setSearch(e.target.value);
