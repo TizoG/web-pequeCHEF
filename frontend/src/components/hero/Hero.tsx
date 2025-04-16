@@ -1,26 +1,48 @@
 import './hero.css';
-import pasta from '../../assets/pasta.jpg';
-import { Button } from '../Button';
 
+import { Button } from '../Button';
+import { useEffect, useState } from 'react';
+
+type RecetaDestacada = {
+    id: number;
+    titulo: string;
+    descripcion: string;
+    imagen: string;
+};
 export function Hero() {
+    const [isRecetaDestacada, setRecetaDestacada] =
+        useState<RecetaDestacada | null>(null);
+    useEffect(() => {
+        fetch('http://127.0.0.1:8000/destacada')
+            .then((res) => res.json())
+            .then((data) => {
+                setRecetaDestacada(data);
+            });
+    }, []);
     return (
         <section className="content">
-            <img src={pasta} alt="Imagen del hero" className="content__img" />
+            <img
+                src={isRecetaDestacada?.imagen}
+                alt={isRecetaDestacada?.titulo}
+                className="content__img"
+            />
             <div className="content__text">
                 <h1 className="content__text__h1">
-                    LIBERE LA EXCELENCIA CULINARIA
+                    {isRecetaDestacada?.titulo
+                        ? isRecetaDestacada.titulo.toUpperCase()
+                        : 'LIBERE LA EXCELENCIA CULINARIA'}
                 </h1>
                 {/* Hemos quitado un div que englobaba el parrafo , puedes verlo en el css */}
                 <p className="content__text__p">
-                    Explora un mundo de sabores, descubre recetas artesanales y
-                    deja que el aroma de nuestra pasión por la cocina llene tu
-                    cocina.
+                    {isRecetaDestacada?.descripcion ||
+                        'Explora un mundo de sabores, descubre recetas artesanales y deja que el aroma de nuestra pasión por la cocina llene tu cocina.'}
                 </p>
                 {/**Aqui hemos quitado el div, que engloba el boton */}
                 <Button
                     type="button"
                     text="EXPLORE RECIPES"
                     className="button"
+                    to={`/recetas/${isRecetaDestacada?.id}`}
                 />
             </div>
         </section>

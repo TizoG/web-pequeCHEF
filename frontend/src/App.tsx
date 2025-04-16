@@ -11,6 +11,11 @@ import { PageAbout } from './pages/PageAbout/PageAbout';
 import { PageNoticias } from './pages/Noticias/PageNoticias';
 import { DetalleReceta } from './pages/DetalleReceta/DetalleReceta';
 import { PaginaBusqueda } from './pages/PaginaBusqueda/PaginaBusqueda';
+import { Desayunos } from './pages/PaginasWrapper/Desayunos';
+import { Comidas } from './pages/PaginasWrapper/Comidas';
+import { Meriendas } from './pages/PaginasWrapper/Meriendas';
+import { Cenas } from './pages/PaginasWrapper/Cenas';
+import { Postres } from './pages/PaginasWrapper/Postres';
 
 function App() {
     return (
@@ -27,6 +32,11 @@ function App() {
                 <Route path="/aboutus" element={<PageAbout />}></Route>
                 <Route path="/noticias" element={<PageNoticias />}></Route>
                 <Route path="/search" element={<PaginaBusqueda />}></Route>
+                <Route path="/desayunos" element={<Desayunos />}></Route>
+                <Route path="/comidas" element={<Comidas />}></Route>
+                <Route path="/meriendas" element={<Meriendas />}></Route>
+                <Route path="/cenas" element={<Cenas />}></Route>
+                <Route path="/postres" element={<Postres />}></Route>
             </Routes>
             <Newsletter />
             <Footer />

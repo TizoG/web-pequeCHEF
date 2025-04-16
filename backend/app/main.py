@@ -6,6 +6,7 @@ from app.db.database import BASE, session_local, engine
 from app.api.router.recetas import router as receta_router
 from app.api.router.categorias import router as categoria_router
 from app.api.router.ingredientes import router as ingredientes_router
+from app.api.router.destacada import router as destacada_router
 from app.api.router.suscriptores import router as suscriptores
 from sqlalchemy.orm import sessionmaker
 from app.db.models import Categorias, Ingredientes, RecetaCategoria, RecetaIngredientes, Recetas
@@ -14,6 +15,7 @@ app = FastAPI()
 app.include_router(receta_router)
 app.include_router(categoria_router)
 app.include_router(ingredientes_router)
+app.include_router(destacada_router)
 app.include_router(suscriptores)
 
 app.add_middleware(
@@ -30,57 +32,60 @@ db = session_local()
 
 def insertar_recetas():
     nueva_receta = Recetas(
-        titulo="Pollo Mágico con Limón y Ajo",
-        descripcion="Un delicioso y tierno pollo marinado en limón y ajo, cocinado a la perfección para sorprender y enamorar a los más pequeños con sabores frescos y naturales.",
-        descripcion_original="""  Imagine un suculento pollo impregnado de las vibrantes notas
- de limón y el aromático susurro del ajo. Es una
- sinfonía de sabores pensada para encantar el paladar infantil,
- donde cada trocito cuenta una historia de creatividad y cariño.
- Mientras el horno se calienta y la cocina se inunda de un
- delicioso aroma cítrico, el ambiente se transforma en un
- escenario de pequeñas grandes aventuras. Esta receta, además
- de nutritiva, es una obra de arte culinaria que invita a los
- niños a explorar, a jugar y a enamorarse de la cocina. Con cada
- mordisco, descubren que preparar comida saludable puede ser una
- aventura tan divertida como sabrosa, dejando una huella mágica
- en cada sonrisa.
- 
- """,
+        titulo="Tortilla de Espinacas y Queso",
+        descripcion="Tortilla de espinacas con queso, esponjosa y llena de sabor, perfecta para comenzar el día o terminarlo de manera saludable.",
+        descripcion_original="""Una tortilla esponjosa y cargada de sabor, enriquecida con espinacas frescas y queso derretido.
+Este plato es ideal tanto para un desayuno abundante como para una cena ligera, brindando un aporte extra de verduras y proteínas de forma deliciosa.""",
         pasos={
-            "Preparar la marinada": "En un bowl, mezcla el jugo de limón, el ajo picado, el aceite de oliva, el orégano, sal y pimienta.",
-            "Marinar el pollo": "Coloca los trozos de pollo en la mezcla, asegúrate de que queden bien cubiertos. Deja reposar en el refrigerador durante al menos 30 minutos.",
-            "Precalentar": "Enciende el horno y precaliéntalo a 200°C.",
-            "Hornear": "Coloca el pollo en la fuente para horno y distribúyelos en una sola capa para que se doren de manera uniforme.",
-            "Cocción": "Hornea durante 20-25 minutos o hasta que el pollo esté dorado y jugoso.",
-            "Presentación": "Decora con rodajas de limón y hojas de perejil. Sirve acompañado de verduras al vapor o una ensalada fresca.",
+            "Preparar los ingredientes": [
+                "Lava y pica finamente las espinacas.",
+                "Ralla el queso (puedes usar mozzarella, cheddar suave o una mezcla)."
+            ],
+            "Preparar la mezcla": [
+                "Bate los huevos junto con la leche en un tazón, añade sal y pimienta.",
+                "Incorpora las espinacas picadas, el ajo (si lo usas) y el queso rallado a la mezcla."
+            ],
+            "Cocinar la tortilla": [
+                "Calienta el aceite de oliva en la sartén a fuego medio.",
+                "Vierte la mezcla en la sartén y cocina a fuego lento, permitiendo que se cuaje por abajo.",
+                "Voltea cuidadosamente la tortilla para dorar el otro lado."
+            ],
+            "Servir": [
+                "Una vez cocida y esponjosa, retira la tortilla del fuego.",
+                "Sirve caliente y disfruta."
+            ]
         },
-        imagen="https://res.cloudinary.com/dj4ynkqqi/image/upload/v1744472809/02_pollo-al-limon_itormt.png",
-        preparacion_previa={"Marinar el pollo": "Cortar el pollo en trocitos adecuados y marinarlo durante al menos 30 minutos en una mezcla de jugo de limón, ajo picado (en poca cantidad, adaptado al gusto infantil) y un toque de aceite de oliva.",
-                            "Precalentar el horno": "A 200°C (392°F)."
-                            },
+        imagen="https://res.cloudinary.com/dj4ynkqqi/image/upload/v1744729077/06_tortilla_francesa_dmpz24.png",
+        preparacion_previa={
+            "Lavar espinacas": "Lava y pica finamente las espinacas.",
+            "Rallar queso": "Ralla el queso en un recipiente aparte (puedes usar una mezcla de quesos)."
+        },
         equipamiento=[
-            "Bowl", "tabla de cortar y cuchillo", "Fuente para horno", "Cuchara medidora", "Horno"
+            "Sartén antiadherente",
+            "Tazón para batir los huevos",
+            "Espátula",
+            "Tabla de cortar y cuchillo"
         ],
         valores_nutricionales={
-            "calorias": {"cantidad": 220, "unidad": "kcal"},
-            "proteinas": {"cantidad": 30, "unidad": "g"},
-            "carbohidratos": {"cantidad": 5, "unidad": "g"},
-            "grasas": {"cantidad": 8, "unidad": "g"},
+            "calorias": {"cantidad": 180, "unidad": "kcal"},
+            "proteinas": {"cantidad": 14, "unidad": "g"},
+            "carbohidratos": {"cantidad": 3, "unidad": "g"},
+            "grasas": {"cantidad": 12, "unidad": "g"},
             "fibra": {"cantidad": 1, "unidad": "g"}
         },
-        tiempo_cocina="35-40 minutos",
+        tiempo_cocina="20-22 minutos",
         dificultad="Fácil",
-        tags=["Pollo", "Limon", "Ajo"],
-        porciones=4,
+        tags=["Desayuno", "Cena Ligera", "Tortilla", "Cocina Infantil"],
+        porciones=3,
         tips=[
-            "Acompaña con arroz integral o puré de papas para variar las comidas.",
-            "Utiliza platos coloridos y presenta las rodajas de limón formando caritas o figuras sencillas que incentiven la creatividad."
-        ],
+            "Si deseas una tortilla aún más esponjosa, separa las claras, bátelas a punto de nieve y agrégalas a la mezcla final.",
+            "Deja que los niños participen ayudando a batir los huevos con supervisión."
+        ]
     )
 
     # Categorías
     categorias_obj = []
-    for nombre_categoria in ["all", "carnes", "comida", "pollo"]:
+    for nombre_categoria in ["all", "cena", "almuerzo"]:
         categoria_obj = db.query(Categorias).filter(
             Categorias.nombre == nombre_categoria).first()
         if not categoria_obj:
@@ -98,14 +103,13 @@ def insertar_recetas():
 
     # Ingredientes
     ingredientes = [
-        {"nombre": "pechuga de pollo (sin piel y en trozos pequeños)",
-         "cantidad": 500, "unidad": "gramos"},
-        {"nombre": " jugo de limón", "cantidad": 1, "unidad": "unidad"},
-        {"nombre": "Ajo", "cantidad": 2, "unidad": "dientes"},
-        {"nombre": "Aceite de oliva virgen extra",
-            "cantidad": 2, "unidad": "cucharadas"},
-        {"nombre": "Sal y Pimienta", "cantidad": 1, "unidad": "al gusto"},
-        {"nombre": "Orégano seco", "cantidad": 1, "unidad": "cucharada"},
+        {"nombre": "huevos", "cantidad": 4, "unidad": "unidad"},
+        {"nombre": "espinacas frescas picadas", "cantidad": 1, "unidad": "taza"},
+        {"nombre": "queso rallado", "cantidad": 0.5, "unidad": "taza"},
+        {"nombre": "leche", "cantidad": 0.25, "unidad": "taza"},
+        {"nombre": "ajo finamente picado", "cantidad": 1, "unidad": "diente"},
+        {"nombre": "sal y pimienta", "cantidad": 1, "unidad": "al gusto"},
+        {"nombre": "aceite de oliva", "cantidad": 1, "unidad": "cucharada"}
     ]
 
     for i_data in ingredientes:

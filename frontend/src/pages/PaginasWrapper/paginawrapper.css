@@ -1,0 +1,15 @@
+.content-recetas__wrapper {
+    max-width: 1350px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+}
+.spacing {
+    margin-top: 80px;
+}
+
+.content-recetas__cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+}

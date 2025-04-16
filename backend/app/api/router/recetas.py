@@ -6,6 +6,7 @@ from app.db.database import session_local
 from app.db.models import Categorias, Ingredientes, RecetaIngredientes, Recetas, RecetaCategoria
 from app.schemas import CategoriasSchema, RecetasSchema, Respuestarecetas
 from app.db.crud import actualizar_receta_con_ingredientes, eliminar_receta
+from datetime import datetime, timedelta, timezone
 
 router = APIRouter()
 
@@ -165,3 +166,46 @@ def nombre_receta(titulo: str, db: Session = Depends(get_db)):
         )
         for receta in db_recetas
     ])
+
+
+@router.get("/recetas/destacada")
+def receta_destacada(db: Session = Depends(get_db)):
+    # Fecha actual
+    ahora = datetime.now(timezone.utc)
+    fecha_limite = ahora - timedelta(days=1)
+
+    # Buscar la receta mas reciente( en las ultimas 24h)
+    receta_destacada = db.query(Recetas).filter(
+        Recetas.fecha_creacion > fecha_limite).order_by(Recetas.fecha_creacion.desc()).first()
+
+    if not receta_destacada:
+        # Si no hay recetas en las ultimas 24h, seleccionamos una aleatoria
+        receta_destacada = db.query(Recetas).order_by(func.random()).first()
+
+    if not receta_destacada:
+        raise HTTPException(
+            status_code=404, detail="No tenemos ninguna receta."
+        )
+
+    return {
+        "id": receta_destacada.id,
+        "titulo": receta_destacada.titulo,
+        "descripcion": receta_destacada.descripcion,
+        "imagen": receta_destacada.imagen
+    }
+
+
+@router.get("/recetas/categoria/{categoria_nombre}")
+def recetas_por_categorias(categoria_nombre: str, db: Session = Depends(get_db)):
+    db_categorias = db.query(Categorias).filter(
+        Categorias.nombre == categoria_nombre).first()
+
+    if not db_categorias:
+        raise HTTPException(
+            status_code=404, detail="No tenemos ninguna receta."
+        )
+
+    recetas = db.query(Recetas).join(Recetas.categorias).filter(
+        Categorias.id == db_categorias.id).all()
+
+    return {"recetas": recetas}
