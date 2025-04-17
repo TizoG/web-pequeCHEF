@@ -32,60 +32,61 @@ db = session_local()
 
 def insertar_recetas():
     nueva_receta = Recetas(
-        titulo="Tortilla de Espinacas y Queso",
-        descripcion="Tortilla de espinacas con queso, esponjosa y llena de sabor, perfecta para comenzar el día o terminarlo de manera saludable.",
-        descripcion_original="""Una tortilla esponjosa y cargada de sabor, enriquecida con espinacas frescas y queso derretido.
-Este plato es ideal tanto para un desayuno abundante como para una cena ligera, brindando un aporte extra de verduras y proteínas de forma deliciosa.""",
+        titulo="Tacos Suaves de Pescado con Guacamole",
+        descripcion="Tacos ligeros y sabrosos con filetes de pescado, guacamole casero y verduras frescas, ideales para una cena rápida y saludable.",
+        descripcion_original="""Una opción fresca y deliciosa para cualquier día de la semana. 
+Estos tacos suaves de pescado combinan sabores vibrantes con una preparación sencilla. 
+El guacamole casero y las verduras crujientes aportan textura y color, creando una comida nutritiva que encantará a grandes y pequeños.""",
         pasos={
             "Preparar los ingredientes": [
-                "Lava y pica finamente las espinacas.",
-                "Ralla el queso (puedes usar mozzarella, cheddar suave o una mezcla)."
+                "Sazona los filetes de pescado con pimentón, sal y pimienta.",
+                "Lava y ralla las verduras.",
+                "Prepara el guacamole machacando el aguacate con lima, sal y pimienta."
             ],
-            "Preparar la mezcla": [
-                "Bate los huevos junto con la leche en un tazón, añade sal y pimienta.",
-                "Incorpora las espinacas picadas, el ajo (si lo usas) y el queso rallado a la mezcla."
+            "Cocinar el pescado": [
+                "Cocina el pescado en una sartén con un poco de aceite hasta que esté dorado y cocido.",
+                "Desmenúzalo en trozos medianos para los tacos."
             ],
-            "Cocinar la tortilla": [
-                "Calienta el aceite de oliva en la sartén a fuego medio.",
-                "Vierte la mezcla en la sartén y cocina a fuego lento, permitiendo que se cuaje por abajo.",
-                "Voltea cuidadosamente la tortilla para dorar el otro lado."
-            ],
-            "Servir": [
-                "Una vez cocida y esponjosa, retira la tortilla del fuego.",
-                "Sirve caliente y disfruta."
+            "Montar los tacos": [
+                "Calienta ligeramente las tortillas.",
+                "Agrega el pescado, el guacamole, el repollo rallado y la zanahoria.",
+                "Puedes añadir un poco más de lima por encima antes de servir."
             ]
         },
-        imagen="https://res.cloudinary.com/dj4ynkqqi/image/upload/v1744729077/06_tortilla_francesa_dmpz24.png",
+        # reemplaza por la URL real que uses
+        imagen="https://res.cloudinary.com/dj4ynkqqi/image/upload/v1744885426/08_tacos_pescado_qwerty.png",
         preparacion_previa={
-            "Lavar espinacas": "Lava y pica finamente las espinacas.",
-            "Rallar queso": "Ralla el queso en un recipiente aparte (puedes usar una mezcla de quesos)."
+            "Sazonar y cocinar pescado": "Sazona con especias y cocina hasta dorar.",
+            "Preparar guacamole": "Machaca el aguacate con lima, sal y pimienta.",
+            "Rallar verduras": "Lava y ralla la zanahoria y repollo."
         },
         equipamiento=[
-            "Sartén antiadherente",
-            "Tazón para batir los huevos",
+            "Sartén",
             "Espátula",
-            "Tabla de cortar y cuchillo"
+            "Tabla de cortar y cuchillo",
+            "Rallador"
         ],
         valores_nutricionales={
-            "calorias": {"cantidad": 180, "unidad": "kcal"},
-            "proteinas": {"cantidad": 14, "unidad": "g"},
-            "carbohidratos": {"cantidad": 3, "unidad": "g"},
-            "grasas": {"cantidad": 12, "unidad": "g"},
-            "fibra": {"cantidad": 1, "unidad": "g"}
+            "calorias": {"cantidad": 320, "unidad": "kcal"},
+            "proteinas": {"cantidad": 22, "unidad": "g"},
+            "carbohidratos": {"cantidad": 26, "unidad": "g"},
+            "grasas": {"cantidad": 15, "unidad": "g"},
+            "fibra": {"cantidad": 5, "unidad": "g"}
         },
-        tiempo_cocina="20-22 minutos",
+        tiempo_cocina="20 minutos",
         dificultad="Fácil",
-        tags=["Desayuno", "Cena Ligera", "Tortilla", "Cocina Infantil"],
-        porciones=3,
+        tags=["Tacos", "Pescado", "Guacamole",
+              "Cocina para Niños", "Cena Ligera"],
+        porciones=4,
         tips=[
-            "Si deseas una tortilla aún más esponjosa, separa las claras, bátelas a punto de nieve y agrégalas a la mezcla final.",
-            "Deja que los niños participen ayudando a batir los huevos con supervisión."
+            "Puedes sustituir el pescado por tofu crujiente para una versión vegana.",
+            "Agrega unas gotas de salsa picante suave si los niños disfrutan sabores más atrevidos."
         ]
     )
 
     # Categorías
     categorias_obj = []
-    for nombre_categoria in ["all", "cena", "almuerzo"]:
+    for nombre_categoria in ["all", "cena", "tacos", "pescado", "guacamole", "cocina para niños"]:
         categoria_obj = db.query(Categorias).filter(
             Categorias.nombre == nombre_categoria).first()
         if not categoria_obj:
@@ -103,13 +104,15 @@ Este plato es ideal tanto para un desayuno abundante como para una cena ligera, 
 
     # Ingredientes
     ingredientes = [
-        {"nombre": "huevos", "cantidad": 4, "unidad": "unidad"},
-        {"nombre": "espinacas frescas picadas", "cantidad": 1, "unidad": "taza"},
-        {"nombre": "queso rallado", "cantidad": 0.5, "unidad": "taza"},
-        {"nombre": "leche", "cantidad": 0.25, "unidad": "taza"},
-        {"nombre": "ajo finamente picado", "cantidad": 1, "unidad": "diente"},
+        {"nombre": "filetes de pescado blanco", "cantidad": 2, "unidad": "unidad"},
+        {"nombre": "pimentón dulce", "cantidad": 1, "unidad": "cucharadita"},
         {"nombre": "sal y pimienta", "cantidad": 1, "unidad": "al gusto"},
-        {"nombre": "aceite de oliva", "cantidad": 1, "unidad": "cucharada"}
+        {"nombre": "aceite de oliva", "cantidad": 1, "unidad": "cucharada"},
+        {"nombre": "repollo morado rallado", "cantidad": 0.5, "unidad": "taza"},
+        {"nombre": "zanahoria rallada", "cantidad": 1, "unidad": "unidad"},
+        {"nombre": "aguacate", "cantidad": 1, "unidad": "unidad"},
+        {"nombre": "lima", "cantidad": 0.5, "unidad": "unidad"},
+        {"nombre": "tortillas pequeñas", "cantidad": 4, "unidad": "unidad"}
     ]
 
     for i_data in ingredientes:

@@ -17,7 +17,7 @@ export function Cenas() {
         async function getRecetas() {
             try {
                 const response = await fetch(
-                    'http://localhost:8000/recetas/categoria/cenas'
+                    'http://localhost:8000/recetas/categoria/cena'
                 );
 
                 if (!response.ok) {
@@ -39,9 +39,14 @@ export function Cenas() {
     }, []);
     const recetasVisibles = Array.isArray(recetas) ? recetas.slice(indice) : [];
     return (
-        <section className="content-recetas__wrapper colection__cards">
-            <h1>Cenas</h1>
-            <div>
+        <section className="content-recetas__wrapper colection__cards spacing">
+            <div className="colection__text">
+                <p className="colection__badger">CENAS</p>
+                <h2 className="colection__title">
+                    ELIGE LA RECETA QUE MAS TE GUSTE
+                </h2>
+            </div>
+            <div className="content-recetas__cards">
                 {!isLoading && recetasVisibles.length > 0
                     ? recetasVisibles.map((receta) => (
                           <CardRecetas

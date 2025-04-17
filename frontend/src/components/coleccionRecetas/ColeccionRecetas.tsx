@@ -27,12 +27,13 @@ function ColeccionButton({ href, text, setCategoria, isCategoria }: Props) {
 
 const coleccionLinks = [
     { href: 'all', text: 'ALL' },
-    { href: 'vegan', text: 'VEGAN' },
+    { href: 'vegano', text: 'VEGANO' },
     { href: 'carnes', text: 'CARNES' },
     { href: 'pastas', text: 'PASTAS' },
-    { href: 'dinner', text: 'DINNER' },
-    { href: 'dessert', text: 'DESSERT' },
-    { href: 'bite', text: 'QUICK BITE!' },
+    { href: 'pescado', text: 'PESCADOS' },
+    { href: 'sopas', text: 'SOPAS' },
+    { href: 'guisos', text: 'GUISOS' },
+    { href: 'arroces', text: 'ARROCES' },
 ];
 
 type Receta = {
