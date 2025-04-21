@@ -1,4 +1,4 @@
-import './PageAbout.css';
+import './pageabout.css';
 import imagenCocinero from '../../assets/imagenCocinero.png';
 export function PageAbout() {
     return (
