@@ -28,3 +28,4 @@ starkbank-ecdsa==2.2.0
 starlette==0.46.1
 typing_extensions==4.12.2
 uvicorn==0.34.0
+pydantic[email]
