@@ -1,19 +1,47 @@
+/* Contenedor principal de la sección */
 .content-wrapper {
-    display: flex;
-
-    margin: 40px auto;
-    width: 1350px;
-
-    align-items: end;
-    gap: 238px;
+    display: flex; /* Usamos flexbox para alinear contenido */
+    margin: 40px auto; /* Margen superior/inferior de 40px, centrado horizontal */
+    width: 1350px; /* Ancho máximo en escritorio */
+    align-items: center; /* Centra verticalmente los elementos en el eje cruzado */
+    gap: 238px; /* Espacio entre elementos */
+    flex-direction: column; /* Apila verticalmente en móviles */
+    transition: all 0.6s ease-in-out; /* Transición suave para cambios de estado */
+    overflow: hidden; /* Oculta contenido que se desborde */
+    position: relative; /* Necesario para posicionar hijos absolutamente */
+    padding: 2rem; /* Espaciado interno */
+    box-sizing: border-box; /* Incluye padding en el cálculo del tamaño */
+    max-width: 100%; /* No se desborda del contenedor padre */
 }
 
+/* Layout para pantallas medianas en adelante (tablet y desktop) */
+@media (min-width: 768px) {
+    .content-wrapper {
+        flex-direction: row; /* Alinea los elementos en fila */
+        justify-content: space-between; /* Espacia elementos en los extremos */
+    }
+}
+
+/* Contenedor del texto (título, párrafo, botón) */
 .text-wrapper {
-    width: 494px;
-    height: 276px;
-    margin-left: 52px;
+    max-width: 500px; /* Limita el ancho del bloque de texto */
+    transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out; /* Animación para movimiento y opacidad */
+    z-index: 1; /* Se asegura de estar encima de otros elementos */
 }
 
+/* Estado cuando el texto está centrado (cuando el menú está oculto) */
+.text-slide-center {
+    transform: translateX(450px); /* Empuja el texto hacia la derecha */
+    opacity: 1; /* Completamente visible */
+}
+
+/* Estado cuando el texto se desliza hacia la izquierda (cuando el menú aparece) */
+.text-slide-left {
+    transform: translateX(-20px); /* Movimiento leve hacia la izquierda */
+    opacity: 0.8; /* Ligeramente desvanecido */
+}
+
+/* Estilo para la etiqueta "EXPLORA" */
 .explora {
     padding: 4px 8px;
     display: inline-block;
@@ -24,6 +52,7 @@
     margin-bottom: 0px;
 }
 
+/* Estilo para el título */
 .title {
     margin: 0px;
     margin-bottom: 0px;
@@ -33,15 +62,16 @@
     font-weight: bold;
 }
 
+/* Estilo para el párrafo */
 .parrafo {
     margin-top: 12px;
     font-size: 16px;
     line-height: 140%;
     color: #262522;
     opacity: 0.8;
-    margin-bottom: 40px;
 }
 
+/* Botón que alterna la visibilidad del menú */
 .button-wrapper {
     margin-top: 40px;
     font-size: 14px;
@@ -53,18 +83,46 @@
     background-color: #f0ebe1;
     transition: all 0.2s ease;
     text-decoration: none;
+    position: relative; /* Permite control de superposición con z-index */
+    z-index: 5; /* Asegura que esté encima del menú deslizante */
 }
 
+/* Efecto hover para el botón */
 .button-wrapper:hover {
     cursor: pointer;
     background-color: #ddd9cf;
 }
 
+/* Contenedor del menú de íconos */
 .content-icons {
     width: 497px;
     height: 424px;
+    transition: transform 0.8s ease-in-out, opacity 0.8s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    position: absolute; /* Se posiciona respecto al contenedor padre */
+    right: 2rem; /* Separación del borde derecho */
+    top: 2rem; /* Separación del borde superior */
+    z-index: 2; /* Por encima del fondo pero debajo del botón */
 }
 
+/* Estado cuando el menú se desliza hacia adentro (visible) */
+.menu-slide-in {
+    transform: translateX(
+        -100px
+    ); /* Se desliza desde la derecha hacia adentro */
+    opacity: 1;
+    pointer-events: all; /* Permite clics cuando está visible */
+}
+
+/* Estado cuando el menú se oculta */
+.menu-slide-out {
+    transform: translateX(100%); /* Se desliza hacia afuera de la pantalla */
+    opacity: 0;
+    pointer-events: none; /* No permite interacción cuando está oculto */
+}
+
+/* Contenedor individual de cada ítem del menú */
 .content-icons__container {
     display: flex;
     padding-top: 16px;
@@ -75,19 +133,49 @@
     padding-inline: 24px;
     transition: all 0.2s ease;
 }
+
+/* Efecto hover para ítems del menú */
 .content-icons__container:hover {
     background-color: #c4e5fc;
     cursor: pointer;
 }
+
+/* Link que envuelve el contenedor */
 .content-icons__link {
     text-decoration: none;
     color: #262522;
 }
+
+/* Estilo de los íconos */
 .icons {
     width: 40px;
     height: 40px;
 }
 
+/* Texto que acompaña a cada ícono */
 .text__icons {
     font-size: 18px;
+}
+
+/* Media query para pantallas móviles */
+@media (max-width: 767px) {
+    .content-wrapper {
+        flex-direction: column; /* Apila todo verticalmente */
+        gap: 60px; /* Aumenta el espacio entre secciones */
+    }
+
+    .content-icons {
+        position: static; /* Elimina posicionamiento absoluto */
+        transform: translateY(20px); /* Desliza ligeramente hacia abajo */
+    }
+
+    /* Animación para mostrar el menú en móvil */
+    .menu-slide-in {
+        transform: translateY(0);
+    }
+
+    /* Animación para ocultar el menú en móvil */
+    .menu-slide-out {
+        transform: translateY(40px);
+    }
 }

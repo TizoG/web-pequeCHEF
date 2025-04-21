@@ -33,7 +33,7 @@ const coleccionLinks = [
     { href: 'pescado', text: 'PESCADOS' },
     { href: 'sopas', text: 'SOPAS' },
     { href: 'guisos', text: 'GUISOS' },
-    { href: 'arroces', text: 'ARROCES' },
+    { href: 'arroz', text: 'ARROCES' },
 ];
 
 type Receta = {
@@ -87,7 +87,7 @@ export function ColeccionRecetas() {
             <div className="colection__text">
                 <p className="colection__badger">RECETAS</p>
                 <h2 className="colection__title">
-                    ELIGE LA RECETA QUE MAS TE GUSTE
+                    ALGUNAS DE NUESTRAS RECETAS
                 </h2>
                 <p className="colection__p">
                     Con nuestra variada colección de recetas tenemos algo para

@@ -31,12 +31,12 @@ export function Footer() {
     return (
         <footer className="footer">
             <div className="container__footer">
-                <img
+                {/*Componenete de los link del navbar*/}
+                {/*<img
                     className="logo-footer"
                     src={footerlogo}
                     alt="logo de la web"
-                />
-                {/*Componenete de los link del navbar*/}
+                />*/}
                 <ul className="footer-list">
                     {navLinks.map((link, index) => (
                         <NavbarItem
@@ -46,14 +46,19 @@ export function Footer() {
                         />
                     ))}
                 </ul>
+                {/*
+                    
                 <div className="footer-list__container__icons">
                     {iconos.map((icon, index) => (
                         <IconFooter key={index} {...icon} />
                     ))}
                 </div>
+                    */}
             </div>
             <div className="footer-copyright">
-                <p className="copyright">COPYRIGHT: 2025</p>
+                <p className="copyright">
+                    Recetas hechas con amor para tus peques 2025
+                </p>
             </div>
         </footer>
     );

@@ -5,7 +5,7 @@ import { LuSalad } from 'react-icons/lu';
 import { MdOutlineLunchDining } from 'react-icons/md';
 import { LuDessert } from 'react-icons/lu';
 import { LiaCookieBiteSolid } from 'react-icons/lia';
-import { JSX } from 'react';
+import { JSX, useState } from 'react';
 
 type ProprsIcons = {
     icon: JSX.Element;
@@ -48,9 +48,16 @@ const icons = [
 ];
 
 export function Wrapper() {
+    const [mostrarMenu, setMostrarMenu] = useState(false);
     return (
-        <section className="content-wrapper">
-            <div className="text-wrapper">
+        <section
+            className={`content-wrapper ${mostrarMenu ? 'show-menu' : ''}`}
+        >
+            <div
+                className={`text-wrapper ${
+                    mostrarMenu ? 'text-slide-left' : 'text-slide-center'
+                }`}
+            >
                 <p className="explora">EXPLORA</p>
                 <h2 className="title">NUESTROS DIVERSOS PLATOS</h2>
                 <p className="parrafo">
@@ -59,13 +66,19 @@ export function Wrapper() {
                     selección curada tiene algo para satisfacer todos los
                     paladares.
                 </p>
-                <Button
+                <button
                     className="button-wrapper"
-                    text="VER MAS"
-                    to="/noticias"
-                />
+                    onClick={() => setMostrarMenu((prev) => !prev)}
+                >
+                    {mostrarMenu ? 'VER MENOS' : 'VER MÁS'}
+                </button>
             </div>
-            <div className="content-icons">
+            {/* Mostrar el menú solo si mostrarMenu es true */}
+            <div
+                className={`content-icons ${
+                    mostrarMenu ? 'menu-slide-in' : 'menu-slide-out'
+                }`}
+            >
                 {icons.map((icon, index) => (
                     <WrapperIcons key={index} {...icon} />
                 ))}

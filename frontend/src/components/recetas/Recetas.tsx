@@ -59,7 +59,10 @@ export function Recetas() {
     return (
         <section className="content-carrousel__recetas">
             <div className="content-carrousel__content">
-                <h2 className="content-carrousel__content__h2">RECETAS</h2>
+                <h2 className="content-carrousel__content__h2">
+                    {' '}
+                    ULTIMAS RECETAS
+                </h2>
                 <div className="content-carrousel__content__buttons">
                     <button
                         onClick={retroceder}
