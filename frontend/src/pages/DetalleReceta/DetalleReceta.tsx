@@ -109,7 +109,9 @@ export function DetalleReceta() {
                             src={
                                 receta.imagen.startsWith('http')
                                     ? receta.imagen
-                                    : `http://localhost:8000/${receta.imagen}`
+                                    : `${import.meta.env.VITE_API_URL}${
+                                          receta.imagen
+                                      }`
                             }
                             alt="Imagen de la receta"
                             className="receta__imagen"
