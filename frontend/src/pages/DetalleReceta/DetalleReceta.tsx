@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import { MdTimer } from 'react-icons/md';
 import { FaWeightHanging } from 'react-icons/fa';
 import { TbToolsKitchen3 } from 'react-icons/tb';
-import './detalleRecetas.css';
+import './detallerecetas.css';
 
 type Ingrediente = {
     nombre: string;
