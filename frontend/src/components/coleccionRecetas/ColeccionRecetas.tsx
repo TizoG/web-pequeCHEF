@@ -48,7 +48,7 @@ export function ColeccionRecetas() {
     const [isCategoria, setCategoria] = useState<string>('all');
     const [recetas, setRecetas] = useState<Receta[]>(() => []);
 
-    const [indice, setIndice] = useState(0);
+    const [indice] = useState(0);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     useEffect(() => {

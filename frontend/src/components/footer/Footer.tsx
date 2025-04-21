@@ -1,11 +1,6 @@
 import { NavbarItem } from '../header/Navbar';
-import footerlogo from '../../assets/footerlogo.png';
-import { FaTiktok } from 'react-icons/fa';
-import { ImFacebook2 } from 'react-icons/im';
-import { RiInstagramFill } from 'react-icons/ri';
-import { FaYoutube } from 'react-icons/fa';
+
 import './footer.css';
-import { JSX, useState } from 'react';
 
 const navLinks = [
     { label: 'HOME', href: '/' },
@@ -13,19 +8,30 @@ const navLinks = [
     { label: 'COOKING TIPS', href: 'tiposcocina' },
     { label: 'ABOUT US', href: '/aboutus' },
 ];
-type PropIcon = {
+
+{
+    /*
+    import { FaTiktok } from 'react-icons/fa';
+import { ImFacebook2 } from 'react-icons/im';
+import { RiInstagramFill } from 'react-icons/ri';
+import { FaYoutube } from 'react-icons/fa';
+    import { JSX, useState } from 'react';
+    type PropIcon = {
     icon: JSX.Element;
 };
-function IconFooter({ icon }: PropIcon) {
-    return <i>{icon}</i>;
+    function IconFooter({ icon }: PropIcon) {
+        return <i>{icon}</i>;
+    }
+    
+    const iconos = [
+        { icon: <FaTiktok className="icon-footer" /> },
+        { icon: <ImFacebook2 className="icon-footer" /> },
+        { icon: <RiInstagramFill className="icon-footer" /> },
+        { icon: <FaYoutube className="icon-footer" /> },
+    ];
+    
+    */
 }
-
-const iconos = [
-    { icon: <FaTiktok className="icon-footer" /> },
-    { icon: <ImFacebook2 className="icon-footer" /> },
-    { icon: <RiInstagramFill className="icon-footer" /> },
-    { icon: <FaYoutube className="icon-footer" /> },
-];
 
 export function Footer() {
     return (

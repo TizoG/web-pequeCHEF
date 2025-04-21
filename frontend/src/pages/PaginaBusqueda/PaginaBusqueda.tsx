@@ -11,7 +11,9 @@ type Receta = {
     tiempo: string;
 };
 export function PaginaBusqueda() {
-    const [result, setResult] = useState([]);
+    {
+        /*const [result, setResult] = useState([]);*/
+    }
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const location = useLocation();

@@ -27,7 +27,9 @@ export function Newsletter() {
                 setEmail('');
                 throw new Error('Error al suscribirte');
             }
-            const data = await response.json();
+            {
+                /*const data = await response.json();*/
+            }
             alert('Te has suscrito correctamente.');
             setEmail('');
         } catch (error) {

@@ -1,4 +1,3 @@
-import { Button } from '../Button';
 import './wrapper.css';
 import { MdOutlineBreakfastDining } from 'react-icons/md';
 import { LuSalad } from 'react-icons/lu';
