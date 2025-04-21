@@ -8,7 +8,6 @@ import { Newsletter } from './components/newsletter/Newsletter';
 import { PageRecetas } from './pages/Recetas/PageRecetas';
 import { PageTiposCocina } from './pages/PageTiposCocina/PageTiposCocina';
 import { PageAbout } from './pages/PageAbout/PageAbout';
-import { PageNoticias } from './pages/Noticias/PageNoticias';
 import { DetalleReceta } from './pages/DetalleReceta/DetalleReceta';
 import { PaginaBusqueda } from './pages/PaginaBusqueda/PaginaBusqueda';
 import { Desayunos } from './pages/PaginasWrapper/Desayunos';
@@ -30,7 +29,6 @@ function App() {
                     element={<PageTiposCocina />}
                 ></Route>
                 <Route path="/aboutus" element={<PageAbout />}></Route>
-                <Route path="/noticias" element={<PageNoticias />}></Route>
                 <Route path="/search" element={<PaginaBusqueda />}></Route>
                 <Route path="/desayunos" element={<Desayunos />}></Route>
                 <Route path="/comidas" element={<Comidas />}></Route>
