@@ -17,7 +17,7 @@ export function Comidas() {
         async function getRecetas() {
             try {
                 const response = await fetch(
-                    'http://localhost:8000/recetas/categoria/comida'
+                    `${import.meta.env.VITE_API_URL}/recetas/categoria/comida`
                 );
 
                 if (!response.ok) {

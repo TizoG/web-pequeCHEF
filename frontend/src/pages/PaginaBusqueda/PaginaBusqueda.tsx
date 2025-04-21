@@ -25,7 +25,7 @@ export function PaginaBusqueda() {
             const query = queryParams.get('query');
             try {
                 const response = await fetch(
-                    `http://127.0.0.1:8000/recetas/search/${query}`
+                    `${import.meta.env.VITE_API_URL}/recetas/search/${query}`
                 );
                 if (!response.ok) {
                     throw new Error('Error en la busqueda de recetas');

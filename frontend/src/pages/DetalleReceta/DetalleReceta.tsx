@@ -46,8 +46,8 @@ export function DetalleReceta() {
             try {
                 const url =
                     parseId > 0
-                        ? `http://127.0.0.1:8000/recetas/${parseId}`
-                        : 'http://127.0.0.1:8000/recetas';
+                        ? `${import.meta.env.VITE_API_URL}/${parseId}`
+                        : `${import.meta.env.VITE_API_URL}/recetas`;
 
                 const response = await fetch(url);
 

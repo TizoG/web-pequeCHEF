@@ -56,8 +56,10 @@ export function ColeccionRecetas() {
             try {
                 const url =
                     isCategoria === 'all'
-                        ? 'http://127.0.0.1:8000/recetas'
-                        : `http://127.0.0.1:8000/recetas/categoria/${isCategoria}`;
+                        ? `${import.meta.env.VITE_API_URL}/recetas`
+                        : `${
+                              import.meta.env.VITE_API_URL
+                          }/recetas/categoria/${isCategoria}`;
 
                 const response = await fetch(url);
 

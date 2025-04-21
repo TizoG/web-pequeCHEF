@@ -17,7 +17,7 @@ export function Cenas() {
         async function getRecetas() {
             try {
                 const response = await fetch(
-                    'http://localhost:8000/recetas/categoria/cena'
+                    `${import.meta.env.VITE_API_URL}/recetas/categoria/cena`
                 );
 
                 if (!response.ok) {

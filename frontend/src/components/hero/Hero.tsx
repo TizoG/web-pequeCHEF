@@ -13,7 +13,7 @@ export function Hero() {
     const [isRecetaDestacada, setRecetaDestacada] =
         useState<RecetaDestacada | null>(null);
     useEffect(() => {
-        fetch('http://127.0.0.1:8000/destacada')
+        fetch(`${import.meta.env.VITE_API_URL}/destacada`)
             .then((res) => res.json())
             .then((data) => {
                 setRecetaDestacada(data);

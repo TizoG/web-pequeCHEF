@@ -17,7 +17,7 @@ export function Postres() {
         async function getRecetas() {
             try {
                 const response = await fetch(
-                    'http://localhost:8000/recetas/categoria/postres'
+                    `${import.meta.env.VITE_API_URL}/recetas/categoria/postre`
                 );
 
                 if (!response.ok) {

@@ -17,7 +17,7 @@ export function Desayunos() {
         async function getRecetas() {
             try {
                 const response = await fetch(
-                    'http://localhost:8000/recetas/categoria/desayuno'
+                    `${import.meta.env.VITE_API_URL}/recetas/categoria/desayuno`
                 );
 
                 if (!response.ok) {

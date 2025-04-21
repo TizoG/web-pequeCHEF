@@ -21,7 +21,7 @@ export function CardRecetas({
                 src={
                     imagen.startsWith('http')
                         ? imagen
-                        : `http://localhost:8000/${imagen}`
+                        : `${import.meta.env.VITE_API_URL}/${imagen}`
                 }
                 alt="Imagen de la receta"
                 className="img"

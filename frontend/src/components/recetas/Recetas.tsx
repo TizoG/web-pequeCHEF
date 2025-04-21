@@ -21,7 +21,7 @@ export function Recetas() {
         async function fetchRecetas() {
             try {
                 const response = await fetch(
-                    'http://127.0.0.1:8000/destacada/nuevas'
+                    `${import.meta.env.VITE_API_URL}/destacada/nuevas`
                 );
 
                 if (!response.ok) {

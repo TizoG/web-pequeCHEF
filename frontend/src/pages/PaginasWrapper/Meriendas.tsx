@@ -17,7 +17,7 @@ export function Meriendas() {
         async function getRecetas() {
             try {
                 const response = await fetch(
-                    'http://localhost:8000/recetas/categoria/merienda'
+                    `${import.meta.env.VITE_API_URL}/recetas/categoria/merienda`
                 );
 
                 if (!response.ok) {
