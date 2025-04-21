@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { CardRecetas } from '../../components/recetas/CardRecetas';
-import './paginaBusqueda.css';
+import './paginabusqueda.css';
 
 type Receta = {
     id: number;
